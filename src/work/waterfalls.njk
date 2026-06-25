@@ -13,3 +13,19 @@ description: "Fine art landscape photography collection dedicated to waterfalls,
     <p>Where movement meets stillness.</p>
   </div>
 </section>
+
+<section class="fine-art-story">
+
+  <div class="story-text">
+    <p>
+      Water is never still. It moves, carves, disappears and returns, carrying light through the landscape.
+    </p>
+  </div>
+
+  {% for photo in waterfalls %}
+    <figure class="story-image {{ photo.class }} reveal">
+      <img src="{{ photo.src }}" alt="{{ photo.alt }}">
+    </figure>
+  {% endfor %}
+
+</section>

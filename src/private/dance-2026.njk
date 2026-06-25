@@ -1,0 +1,26 @@
+---
+layout: layout.njk
+title: "Dance Recital 2026 | Private Gallery"
+description: "Private gallery for client photo selection."
+---
+
+<section class="page-hero">
+  <p class="subtitle">Private Gallery</p>
+
+  <h1>Dance Recital 2026</h1>
+
+  <p>
+    A private selection gallery for viewing and choosing your favourite photographs.
+  </p>
+</section>
+
+<section class="private-gallery">
+
+  {% for photo in dance2026 %}
+    <figure class="private-photo reveal">
+      <img src="{{ photo.src }}" alt="{{ photo.alt }}">
+      <figcaption>{{ loop.index }}</figcaption>
+    </figure>
+  {% endfor %}
+
+</section>

@@ -14,13 +14,20 @@ description: "Fine art landscape photography collection by Fabrizio Vinciguerra 
   </div>
 </section>
 
-<section class="collection-gallery">
+<section class="fine-art-story">
 
-<img src="/assets/images/woods1.PNG" alt="">
-<img src="/assets/images/woods2.PNG" alt="">
-<img src="/assets/images/woods3.PNG" alt="">
-<img src="/assets/images/woods4.PNG" alt="">
-<img src="/assets/images/woods5.PNG" alt="">
-<img src="/assets/images/woods6.PNG" alt="">
+  <div class="story-text">
+    <p>
+      In the quiet of the woods, light becomes slower. Every branch, shadow and reflection seems to hold its breath.
+    </p>
+  </div>
+
+{% for photo in woods %}
+
+<figure class="story-image {{ photo.class }} reveal">
+    <img src="{{ photo.src }}" alt="{{ photo.alt }}">
+</figure>
+
+{% endfor %}
 
 </section>

@@ -705,3 +705,54 @@ img {
   user-select: none;
   -webkit-user-drag: none;
 }
+
+.about-hero {
+  padding: 220px var(--space-page) 140px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-content h1 {
+  font-size: clamp(32px, 3.6vw, 56px);
+  font-weight: normal;
+  line-height: 1.06;
+  margin: 24px 0 48px;
+  max-width: 900px;
+}
+
+.about-text {
+  max-width: 680px;
+}
+
+.about-text p {
+  font-size: 24px;
+  line-height: 1.8;
+  color: var(--color-muted);
+  margin-bottom: 32px;
+}
+
+.about-story {
+  padding: 0 var(--space-page) 160px;
+}
+
+.about-story-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-story-content p {
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.45;
+  margin-bottom: 60px;
+}
+
+.about-closing {
+  padding: 80px var(--space-page) 180px;
+  text-align: center;
+}
+
+.about-closing p {
+  font-size: clamp(42px, 5vw, 82px);
+  line-height: 1.1;
+  color: var(--color-gold);
+}

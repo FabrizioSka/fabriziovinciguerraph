@@ -14,6 +14,23 @@ description: "Fine art travel photography collection by Fabrizio Vinciguerra."
   </div>
 </section>
 
+
+<section class="fine-art-story">
+
+  <div class="story-text">
+    <p>
+      Every journey begins long before the photograph.
+    </p>
+  </div>
+
+  {% for photo in travel %}
+    <figure class="story-image {{ photo.class }} reveal">
+      <img src="{{ photo.src }}" alt="{{ photo.alt }}">
+    </figure>
+  {% endfor %}
+
+</section>
+
 <section class="fine-art-story">
 
 <div class="story-text">

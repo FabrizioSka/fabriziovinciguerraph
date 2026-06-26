@@ -329,3 +329,8 @@ body.lightbox-open {
   font-size: 13px;
   letter-spacing: 1px;
 }
+
+.private-gallery img {
+  user-select: none;
+  -webkit-user-drag: none;
+}

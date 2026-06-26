@@ -10,6 +10,10 @@
 
     <meta name="description" content="{{ description }}">
 
+    {% if robots %}
+    <meta name="robots" content="{{ robots }}">
+    {% endif %}
+
     <link rel="stylesheet" href="/css/style.css">
 
 </head>

@@ -24,6 +24,7 @@ function getGallery(folderName, label) {
     return {
   src: `/assets/images/${folderName}/${file}`,
   alt: `${label} ${index + 1}`,
+  filename: file.replace(/\.[^/.]+$/, ""),
   class: isPortrait ? "private-portrait" : "private-landscape"
   };
   });

@@ -17,16 +17,27 @@ description: "Private gallery for client photo selection."
 <section class="private-gallery">
 
   {% for photo in dance2026 %}
-    <figure class="private-photo {{ photo.class }} reveal">
-      <img 
-        src="{{ photo.src }}" 
-        alt="{{ photo.alt }}"
-        class="lightbox-image"
-        data-full="{{ photo.src }}"
-         data-title="Photo {{ loop.index }}"
-        >
-      <figcaption>Photo {{ loop.index }}</figcaption>
-    </figure>
+  <figure class="private-photo {{ photo.class }} reveal" data-photo-id="{{ photo.filename }}">
+  <img 
+    src="{{ photo.src }}" 
+    alt="{{ photo.alt }}"
+    class="lightbox-image"
+    data-full="{{ photo.src }}"
+    ddata-title=""
+  >
+ <button class="select-photo" type="button" aria-label="Select photo">
+ </button>
+
+</figure>
   {% endfor %}
 
 </section>
+
+<div class="selection-bar" id="selectionBar">
+  <span id="selectionCount">0 photos selected</span>
+
+  <div class="selection-actions">
+    <button type="button" id="clearSelection">Clear</button>
+    <button type="button" id="copySelection">Copy Selection</button>
+  </div>
+</div>

@@ -22,10 +22,10 @@ function getGallery(folderName, label) {
     const isPortrait = dimensions.height > dimensions.width;
 
     return {
-      src: `/assets/images/${folderName}/${file}`,
-      alt: `${label} ${index + 1}`,
-      class: isPortrait ? "story-portrait" : "story-wide"
-    };
+  src: `/assets/images/${folderName}/${file}`,
+  alt: `${label} ${index + 1}`,
+  class: isPortrait ? "private-portrait" : "private-landscape"
+  };
   });
 }
 

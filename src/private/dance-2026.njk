@@ -17,9 +17,15 @@ description: "Private gallery for client photo selection."
 <section class="private-gallery">
 
   {% for photo in dance2026 %}
-    <figure class="private-photo reveal">
-      <img src="{{ photo.src }}" alt="{{ photo.alt }}">
-      <figcaption>{{ loop.index }}</figcaption>
+    <figure class="private-photo {{ photo.class }} reveal">
+      <img 
+        src="{{ photo.src }}" 
+        alt="{{ photo.alt }}"
+        class="lightbox-image"
+        data-full="{{ photo.src }}"
+         data-title="Photo {{ loop.index }}"
+        >
+      <figcaption>Photo {{ loop.index }}</figcaption>
     </figure>
   {% endfor %}
 

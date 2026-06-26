@@ -1,0 +1,151 @@
+.private-gallery {
+  padding: 0 var(--space-page) 120px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.private-photo {
+  position: relative;
+  margin: 0;
+  background: #111;
+}
+
+.private-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: zoom-in;
+}
+
+.private-landscape {
+  grid-column: span 2;
+}
+
+.private-photo figcaption {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 6px 9px;
+  background: rgba(9, 9, 9, 0.72);
+  color: var(--color-white);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  justify-items: center;
+  background: rgba(0, 0, 0, 0.94);
+  padding: 34px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.lightbox img {
+  grid-column: 2;
+  grid-row: 1;
+  max-width: 100%;
+  max-height: 84vh;
+  object-fit: contain;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.75);
+}
+
+.lightbox-caption {
+  grid-column: 2;
+  grid-row: 2;
+  margin-top: 18px;
+  color: var(--color-white);
+  background: rgba(9, 9, 9, 0.72);
+  padding: 8px 16px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--color-white);
+  font-family: var(--font-serif);
+  cursor: pointer;
+  opacity: 0.55;
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  opacity: 1;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 28px;
+  right: 34px;
+  font-size: 42px;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  font-size: 64px;
+}
+
+.lightbox-prev {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.lightbox-next {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+@media (max-width: 1000px) {
+  .private-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lightbox {
+    grid-template-columns: 50px 1fr 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .private-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .private-landscape {
+    grid-column: span 1;
+  }
+
+  .lightbox {
+    grid-template-columns: 44px 1fr 44px;
+    padding: 20px;
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    font-size: 46px;
+  }
+}

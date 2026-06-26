@@ -1,73 +1,95 @@
-const selectablePhotos = document.querySelectorAll(".private-photo");
-const selectionBar = document.querySelector("#selectionBar");
-const selectionCount = document.querySelector("#selectionCount");
-const clearSelection = document.querySelector("#clearSelection");
-const copySelection = document.querySelector("#copySelection");
+(() => {
+  const selectablePhotos = Array.from(document.querySelectorAll(".private-photo"));
+  const selectionBar = document.querySelector("#selectionBar");
+  const selectionCount = document.querySelector("#selectionCount");
+  const clearSelection = document.querySelector("#clearSelection");
+  const copySelection = document.querySelector("#copySelection");
 
-let selectedPhotos = [];
+  if (!selectablePhotos.length) return;
 
-function updateSelectionBar() {
-  const count = selectedPhotos.length;
+  const storageKey = "selectedPhotos-" + window.location.pathname;
+  let selectedPhotos = JSON.parse(localStorage.getItem(storageKey) || "[]");
 
-  if (!selectionBar || !selectionCount) return;
-
-  selectionCount.textContent =
-    count === 1 ? "1 photo selected" : `${count} photos selected`;
-
-  if (count > 0) {
-    selectionBar.classList.add("is-visible");
-  } else {
-    selectionBar.classList.remove("is-visible");
+  function saveSelection() {
+    localStorage.setItem(storageKey, JSON.stringify(selectedPhotos));
   }
-}
 
-selectablePhotos.forEach((photo) => {
-  const button = photo.querySelector(".select-photo");
-  if (!button) return;
+  function updateUI() {
+    selectablePhotos.forEach((photo) => {
+      const id = photo.dataset.photoId;
+      const button = photo.querySelector(".select-photo");
+      const index = selectedPhotos.indexOf(id);
 
-  button.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+      if (!button) return;
 
-    const id = photo.dataset.photoId;
+      if (index >= 0) {
+        photo.classList.add("is-selected");
+        button.textContent = String(index + 1);
+      } else {
+        photo.classList.remove("is-selected");
+        button.textContent = "";
+      }
+    });
 
-    if (!id) return;
+    if (selectionBar && selectionCount) {
+      const count = selectedPhotos.length;
+      selectionCount.textContent =
+        count === 1 ? "1 photo selected" : `${count} photos selected`;
 
-    if (selectedPhotos.includes(id)) {
-      selectedPhotos = selectedPhotos.filter((item) => item !== id);
-      photo.classList.remove("is-selected");
-    } else {
-      selectedPhotos.push(id);
-      photo.classList.add("is-selected");
+      selectionBar.classList.toggle("is-visible", count > 0);
     }
-
-    updateSelectionBar();
-  });
-});
-
-clearSelection?.addEventListener("click", () => {
-  selectedPhotos = [];
+  }
 
   selectablePhotos.forEach((photo) => {
-    photo.classList.remove("is-selected");
+    const button = photo.querySelector(".select-photo");
+    const id = photo.dataset.photoId;
+
+    if (!button || !id) return;
+
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (selectedPhotos.includes(id)) {
+        selectedPhotos = selectedPhotos.filter((item) => item !== id);
+      } else {
+        selectedPhotos.push(id);
+      }
+
+      saveSelection();
+      updateUI();
+    });
   });
 
-  updateSelectionBar();
-});
+  clearSelection?.addEventListener("click", () => {
+    selectedPhotos = [];
+    saveSelection();
+    updateUI();
+  });
 
-copySelection?.addEventListener("click", async () => {
-  const text = selectedPhotos.join("\n");
+  copySelection?.addEventListener("click", async () => {
+    const galleryTitle =
+      document.querySelector("h1")?.textContent.trim() || "Private Gallery";
 
-  try {
-    await navigator.clipboard.writeText(text);
-    copySelection.textContent = "Copied";
+    const list = selectedPhotos
+      .map((photo, index) => `${index + 1}. ${photo}`)
+      .join("\n");
 
-    setTimeout(() => {
-      copySelection.textContent = "Copy Selection";
-    }, 1600);
-  } catch {
-    alert(text);
-  }
-});
+    const text = `${galleryTitle}
+Selected photographs: ${selectedPhotos.length}
 
-updateSelectionBar();
+${list}`;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      copySelection.textContent = "Copied";
+      setTimeout(() => {
+        copySelection.textContent = "Copy Selection";
+      }, 1600);
+    } catch {
+      alert(text);
+    }
+  });
+
+  updateUI();
+})();

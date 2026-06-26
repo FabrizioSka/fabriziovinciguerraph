@@ -17,6 +17,7 @@ description: "Private gallery for client photo selection."
 <section class="private-gallery">
 
   {% for photo in dance2026 %}
+ 
   <figure class="private-photo {{ photo.class }} reveal" data-photo-id="{{ photo.filename }}">
   <img 
     src="{{ photo.src }}" 

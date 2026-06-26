@@ -184,16 +184,15 @@ body.lightbox-open {
   bottom: 24px;
   z-index: 2000;
   transform: translateX(-50%) translateY(120%);
-  min-width: min(820px, 92vw);
-  flex-wrap: wrap;
-  padding: 18px 22px;
-  background: rgba(9, 9, 9, 0.88);
+  width: min(900px, 92vw);
+  padding: 18px 24px;
+  background: rgba(9, 9, 9, 0.9);
   border: 1px solid rgba(242, 238, 232, 0.16);
   backdrop-filter: blur(16px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 28px;
+  gap: 34px;
   transition: transform 0.35s ease;
 }
 
@@ -210,9 +209,10 @@ body.lightbox-open {
 
 .selection-actions {
   display: flex;
-  gap: 14px;
+  gap: 22px;
   flex-wrap: wrap;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .selection-actions button {
@@ -221,10 +221,11 @@ body.lightbox-open {
   color: var(--color-white);
   font-family: var(--font-serif);
   font-size: 11px;
-  letter-spacing: 1.7px;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
   cursor: pointer;
-  opacity: 0.72;
+  opacity: 0.68;
+  white-space: nowrap;
 }
 
 .selection-actions button:hover {

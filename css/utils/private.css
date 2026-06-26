@@ -261,3 +261,71 @@ body.lightbox-open {
 #copySelection {
   opacity: 0.75;
 }
+
+.private-page.is-locked {
+  display: none;
+}
+
+.gallery-lock {
+  min-height: 100vh;
+  padding: 160px var(--space-page);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-black);
+}
+
+.gallery-lock-box {
+  width: min(520px, 92vw);
+}
+
+.gallery-lock-box h1 {
+  font-size: clamp(54px, 7vw, 96px);
+  font-weight: normal;
+  margin: 14px 0 24px;
+}
+
+.gallery-lock-box p {
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.gallery-lock-box input {
+  width: 100%;
+  padding: 18px 0;
+  margin-bottom: 20px;
+  border: 0;
+  border-bottom: 1px solid rgba(242, 238, 232, 0.28);
+  background: transparent;
+  color: var(--color-white);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  outline: none;
+}
+
+.gallery-lock-box input::placeholder {
+  color: rgba(242, 238, 232, 0.38);
+}
+
+.gallery-lock-box button {
+  padding: 13px 26px;
+  border: 1px solid rgba(200, 184, 159, 0.55);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-white);
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#galleryError {
+  display: block;
+  margin-top: 18px;
+  color: var(--color-gold);
+  font-size: 13px;
+  letter-spacing: 1px;
+}

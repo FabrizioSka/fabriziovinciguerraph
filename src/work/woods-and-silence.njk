@@ -1,16 +1,16 @@
 ---
 layout: layout.njk
 title: "Woods & Silence | Fabrizio Vinciguerra"
-description: "Fine art landscape photography collection by Fabrizio Vinciguerra dedicated to woods, silence and atmosphere."
+description: "Fine art landscape photography collection exploring forests, silence and the intimate relationship between light and nature."
 ---
 
 <section class="collection-hero">
-  <img src="/assets/images/woods.PNG" alt="Woods & Silence">
+  <img src="/assets/images/woods.PNG" alt="Fine art forest landscape from the Woods and Silence collection">
 
   <div class="collection-hero-content">
     <p class="subtitle">Collection 01</p>
     <h1>Woods & Silence</h1>
-    <p>Where silence becomes part of the landscape.</p>
+    <p>Where silence becomes visible.</p>
   </div>
 </section>
 
@@ -25,7 +25,15 @@ description: "Fine art landscape photography collection by Fabrizio Vinciguerra 
 {% for photo in woods %}
 
 <figure class="story-image {{ photo.class }} reveal">
-    <img src="{{ photo.src }}" alt="{{ photo.alt }}">
+    <img 
+  src="{{ photo.src }}" 
+  alt="{{ photo.alt }}"
+     loading="lazy"
+   decoding="async"
+  class="lightbox-image"
+  data-full="{{ photo.src }}"
+  data-title=""
+>
 </figure>
 
 {% endfor %}

@@ -4,10 +4,13 @@ const revealOnScroll = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add("is-visible");
+    } else {
+      entry.target.classList.remove("is-visible");
     }
   });
 }, {
-  threshold: 0.18
+  threshold: 0.16,
+  rootMargin: "0px 0px -8% 0px"
 });
 
 revealElements.forEach((element) => {
@@ -31,6 +34,7 @@ window.addEventListener("scroll", () => {
 const lightbox = document.querySelector("#lightbox");
 const lightboxImg = lightbox?.querySelector("img");
 const lightboxCaption = lightbox?.querySelector(".lightbox-caption");
+const lightboxCounter = lightbox?.querySelector("#lightboxCounter");
 const closeBtn = lightbox?.querySelector(".lightbox-close");
 const prevBtn = lightbox?.querySelector(".lightbox-prev");
 const nextBtn = lightbox?.querySelector(".lightbox-next");
@@ -44,9 +48,20 @@ function openLightbox(index) {
   currentIndex = index;
   const item = lightboxItems[currentIndex];
 
-  lightboxImg.src = item.dataset.full;
-  lightboxImg.alt = item.alt;
-  lightboxCaption.textContent = item.dataset.title || "";
+  lightboxImg.style.opacity = "0";
+
+  setTimeout(() => {
+    lightboxImg.src = item.dataset.full;
+    lightboxImg.alt = item.alt;
+    lightboxCaption.textContent = item.dataset.title || "";
+    if (lightboxCounter) {
+  lightboxCounter.textContent = `${currentIndex + 1} / ${lightboxItems.length}`;
+    }
+
+    lightboxImg.onload = () => {
+      lightboxImg.style.opacity = "1";
+    };
+  }, 180);
 
   lightbox.classList.add("is-open");
   document.body.classList.add("lightbox-open");
@@ -78,7 +93,16 @@ nextBtn?.addEventListener("click", showNext);
 prevBtn?.addEventListener("click", showPrev);
 
 lightbox?.addEventListener("click", (event) => {
-  if (event.target === lightbox) closeLightbox();
+  if (event.target !== lightbox) return;
+
+  const clickX = event.clientX;
+  const middle = window.innerWidth / 2;
+
+  if (clickX > middle) {
+    showNext();
+  } else {
+    showPrev();
+  }
 });
 
 document.addEventListener("keydown", (event) => {

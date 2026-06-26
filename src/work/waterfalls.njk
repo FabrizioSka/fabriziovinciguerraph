@@ -1,7 +1,7 @@
 ---
 layout: layout.njk
 title: "Waterfalls | Fabrizio Vinciguerra"
-description: "Fine art landscape photography collection dedicated to waterfalls, movement and stillness."
+description: "Fine art landscape photography collection exploring waterfalls, movement, stillness and the passage of time."
 ---
 
 <section class="collection-hero">
@@ -24,7 +24,15 @@ description: "Fine art landscape photography collection dedicated to waterfalls,
 
   {% for photo in waterfalls %}
     <figure class="story-image {{ photo.class }} reveal">
-      <img src="{{ photo.src }}" alt="{{ photo.alt }}">
+      <img 
+  src="{{ photo.src }}" 
+  alt="{{ photo.alt }}"
+     loading="lazy"
+   decoding="async"
+  class="lightbox-image"
+  data-full="{{ photo.src }}"
+  data-title=""
+    >
     </figure>
   {% endfor %}
 

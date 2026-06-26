@@ -9,6 +9,19 @@
     <title>{{ title }}</title>
 
     <meta name="description" content="{{ description }}">
+    <link rel="canonical" href="https://www.fabriziovinciguerraph.com{{ page.url }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/assets/images/social/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta name="twitter:image" content="/assets/images/social/og-image.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon.png">
+    <link rel="preload" as="image" href="/assets/images/home.PNG">
+    
 
     {% if robots %}
     <meta name="robots" content="{{ robots }}">
@@ -36,6 +49,7 @@
   <img src="" alt="">
   <button class="lightbox-next" aria-label="Next">›</button>
   <div class="lightbox-caption"></div>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
 </div>
 
 <script src="/js/main.js"></script>

@@ -1,7 +1,7 @@
 ---
 layout: layout.njk
 title: "Travel Stories | Fabrizio Vinciguerra"
-description: "Fine art travel photography collection by Fabrizio Vinciguerra."
+description: "Fine art travel photography collection exploring landscapes, cities and quiet journeys around the world."
 ---
 
 <section class="collection-hero">
@@ -25,7 +25,15 @@ description: "Fine art travel photography collection by Fabrizio Vinciguerra."
 
   {% for photo in travel %}
     <figure class="story-image {{ photo.class }} reveal">
-      <img src="{{ photo.src }}" alt="{{ photo.alt }}">
+      <img 
+  src="{{ photo.src }}" 
+  alt="{{ photo.alt }}"
+     loading="lazy"
+   decoding="async"
+  class="lightbox-image"
+  data-full="{{ photo.src }}"
+  data-title=""
+    >
     </figure>
   {% endfor %}
 

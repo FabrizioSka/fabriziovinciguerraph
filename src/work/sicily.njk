@@ -1,7 +1,7 @@
 ---
 layout: layout.njk
 title: "Sicily | Fabrizio Vinciguerra"
-description: "Fine art landscape photography collection dedicated to Sicily, memory, light and volcanic earth."
+description: "Fine art landscape photography collection exploring Sicily through memory, light, volcanic earth and Mediterranean atmospheres."
 ---
 
 <section class="collection-hero">
@@ -24,7 +24,15 @@ description: "Fine art landscape photography collection dedicated to Sicily, mem
 
   {% for photo in sicily %}
     <figure class="story-image {{ photo.class }} reveal">
-      <img src="{{ photo.src }}" alt="{{ photo.alt }}">
+      <img 
+  src="{{ photo.src }}" 
+  alt="{{ photo.alt }}"
+   loading="lazy"
+   decoding="async"
+  class="lightbox-image"
+  data-full="{{ photo.src }}"
+  data-title=""
+>
     </figure>
   {% endfor %}
 

@@ -4,6 +4,7 @@
   const selectionCount = document.querySelector("#selectionCount");
   const clearSelection = document.querySelector("#clearSelection");
   const copySelection = document.querySelector("#copySelection");
+  const sendSelection = document.querySelector("#sendSelection");
 
   if (!selectablePhotos.length) return;
 
@@ -91,5 +92,19 @@ ${list}`;
     }
   });
 
+    sendSelection?.addEventListener("click", () => {
+    const galleryTitle =
+    document.querySelector("h1")?.textContent.trim() || "Private Gallery";
+
+    const list = selectedPhotos
+    .map((photo, index) => `${index + 1}. ${photo}`)
+    .join("%0D%0A");
+
+    const subject = encodeURIComponent(`Photo Selection - ${galleryTitle}`);
+
+    const body = `Hello Fabrizio,%0D%0A%0D%0AHere is my photo selection from ${galleryTitle}:%0D%0A%0D%0A${list}%0D%0A%0D%0AThank you.`;
+
+    window.location.href = `mailto:vinciguerra.fabrizio@gmail.com?subject=${subject}&body=${body}`;
+});
   updateUI();
 })();

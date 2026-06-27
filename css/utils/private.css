@@ -2,17 +2,16 @@
 
 .private-gallery {
   padding: 0 var(--space-page) 120px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-  align-items: start;
+  columns: 4;
+  column-gap: 22px;
 }
 
 .private-photo {
   position: relative;
-  margin: 0;
+  margin: 0 0 22px;
   background: #111;
   overflow: hidden;
+  break-inside: avoid;
 }
 
 .private-photo img {
@@ -30,9 +29,6 @@
   opacity: 0.88;
 }
 
-.private-landscape {
-  grid-column: span 2;
-}
 
 /* LIGHTBOX */
 
@@ -344,7 +340,7 @@ body.lightbox-open {
 
 @media (max-width: 1000px) {
   .private-gallery {
-    grid-template-columns: repeat(2, 1fr);
+    columns: 2;
   }
 
   .lightbox {
@@ -406,11 +402,7 @@ body.lightbox-open {
 
 @media (max-width: 600px) {
   .private-gallery {
-    grid-template-columns: 1fr;
-  }
-
-  .private-landscape {
-    grid-column: span 1;
+    columns: 1;
   }
 
   .lightbox {

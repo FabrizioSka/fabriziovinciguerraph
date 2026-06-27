@@ -160,7 +160,7 @@ h1 {
 .hero {
   min-height: 100vh;
   position: relative;
-  background-image: url("../assets/images/home.PNG");
+  background-image: url("../assets/images/home.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -602,6 +602,60 @@ h1 {
   font-size: 13px;
 }
 
+/* AWARDS */
+
+.awards-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px var(--space-page) 160px;
+}
+
+.awards-section h2 {
+  max-width: 900px;
+  font-size: clamp(34px, 4vw, 68px);
+  font-weight: normal;
+  line-height: 1.05;
+  margin: 24px 0 50px;
+}
+
+.awards-text {
+  max-width: 760px;
+}
+
+.awards-text p {
+  color: var(--color-muted);
+  font-size: 22px;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.awards-gallery {
+  margin-top: 70px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+}
+
+.awards-gallery figure {
+  margin: 0;
+}
+
+.awards-gallery img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.awards-gallery figcaption {
+   margin-top: 20px;
+  color: var(--color-muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: .8;
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 768px) {
@@ -826,4 +880,23 @@ h1 {
     flex-direction: column;
     gap: 16px;
   }
+
+  .awards-section {
+  padding: 20px 7% 110px;
+}
+
+.awards-section h2 {
+  font-size: clamp(36px, 10vw, 52px);
+}
+
+.awards-text p {
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.awards-gallery {
+  grid-template-columns: 1fr;
+  gap: 42px;
+}
+
 }

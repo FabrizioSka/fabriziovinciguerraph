@@ -415,3 +415,16 @@ body.lightbox-open {
     font-size: 46px;
   }
 }
+
+.private-gallery img,
+.lightbox img,
+.story-image img,
+.featured-work img,
+.work-cover img,
+.collection-hero img {
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  pointer-events: auto;
+}

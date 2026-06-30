@@ -128,19 +128,55 @@ ${list}`;
     }
   });
 
-    sendSelection?.addEventListener("click", () => {
-    const galleryTitle =
+    sendSelection?.addEventListener("click", async () => {
+  const galleryTitle =
     document.querySelector("h1")?.textContent.trim() || "Private Gallery";
 
-    const list = selectedPhotos
+  const list = selectedPhotos
     .map((photo, index) => `${index + 1}. ${photo}`)
-    .join("%0D%0A");
+    .join("\n");
 
-    const subject = encodeURIComponent(`Photo Selection - ${galleryTitle}`);
+  const name = prompt("Inserisci il tuo nome:");
+  if (!name) return;
 
-    const body = `Hello Fabrizio,%0D%0A%0D%0AHere is my photo selection from ${galleryTitle}:%0D%0A%0D%0A${list}%0D%0A%0D%0AThank you.`;
+  const email = prompt("Inserisci la tua email:");
+  if (!email) return;
 
-    window.location.href = `mailto:vinciguerra.fabrizio@gmail.com?subject=${subject}&body=${body}`;
+  const message = `
+Galleria: ${galleryTitle}
+
+Nome: ${name}
+Email: ${email}
+
+Fotografie selezionate: ${selectedPhotos.length}
+
+${list}
+`;
+
+  try {
+    const response = await fetch("https://formspree.io/f/xnjkbrbv", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        gallery: galleryTitle,
+        selected_photos: selectedPhotos.join(", "),
+        message
+      })
+    });
+
+    if (response.ok) {
+      alert("Selezione inviata correttamente. Ti risponderò via email con le modalità di pagamento.");
+    } else {
+      alert("Errore durante l'invio. Copia la selezione e inviala manualmente.");
+    }
+  } catch {
+    alert("Errore durante l'invio. Copia la selezione e inviala manualmente.");
+  }
 });
   updateUI();
 })();

@@ -20,93 +20,86 @@ robots: "noindex, nofollow"
 
 <div class="private-page is-locked" id="privatePage">
 
-<section class="page-hero">
-  <p class="subtitle">Private Gallery</p>
+<section class="collection-hero dance-hero">
 
-  <h1>Dance Recital 2026</h1>
-
-  <p>
-    A private selection gallery for viewing and choosing your favourite photographs.
-  </p>
-</section>
-
-<section class="gallery-instructions">
-  <h2>Come selezionare le fotografie</h2>
-  <p>
-    Premi il piccolo cerchio presente su ogni immagine per aggiungerla alla tua selezione.
-    La selezione verrà salvata automaticamente anche in caso di aggiornamento della pagina.
-    Una volta terminato, utilizza i pulsanti in basso per copiare o inviare la selezione.
-  </p>
-</section>
-
-<section class="private-intro">
-
-  <div class="private-intro-image">
-
-    <img
-
-      src="/assets/images/private/dance-hero.jpg"
-
-      alt="Backstage dancer silhouette"
-
-    >
-
-  </div>
-
-  <div class="private-intro-text">
-
-<section class="gallery-instructions">
-  <h2>Informazioni e prezzi</h2>
-
-  <p>
-    Le fotografie del saggio vengono fornite esclusivamente in formato digitale ad alta risoluzione.
-  </p>
-
-  <ul>
-    <li><strong>Fino a 4 fotografie selezionate:</strong> 4€ per fotografia</li>
-    <li><strong>Dalla 5ª fotografia in poi:</strong> 3€ per fotografia</li>
-  </ul>
-
-  <p>
-    Dopo aver inviato la selezione delle immagini desiderate, riceverò automaticamente il vostro ordine con l'elenco delle fotografie scelte.
-  </p>
-
-  <p>
-    Risponderò personalmente all'email ricevuta indicando le modalità di pagamento e le informazioni per la consegna dei file digitali.
-  </p>
-</section>
-
-<section class="private-gallery">
-
-  {% for photo in dance2026 %}
- 
-  <figure class="private-photo {{ photo.class }} reveal" data-photo-id="{{ photo.filename }}">
-  <img 
-    src="{{ photo.src }}" 
-    alt="{{ photo.alt }}"
-    loading="lazy"
-    decoding="async"
-    class="lightbox-image"
-    data-full="{{ photo.src }}"
-    data-title=""
+  <img
+    src="/assets/images/private/dance-hero.jpg"
+    alt="Silhouette di un ballerino nel backstage"
   >
- <button class="select-photo" type="button" aria-label="Select photo">
- </button>
 
-</figure>
-  {% endfor %}
+  <div class="collection-hero-content">
+    <p class="subtitle">Private Gallery</p>
+
+    <h1>Dance Recital 2026</h1>
+
+    <p>
+      Galleria privata per visualizzare e selezionare le fotografie preferite.
+    </p>
+  </div>
 
 </section>
 
-<div class="selection-bar" id="selectionBar">
-  <span id="selectionCount">0 photos selected</span>
 
-  <div class="selection-actions">
-    <button type="button" id="clearSelection">Clear</button>
-    <button type="button" id="copySelection">Copy Selection</button>
-    <button type="button" id="sendSelection">Send Selection</button>
+  <section class="gallery-instructions">
+    <h2>Come selezionare le fotografie</h2>
+    <p>
+      Premi il piccolo cerchio presente su ogni immagine per aggiungerla alla tua selezione.
+      La selezione verrà salvata automaticamente anche in caso di aggiornamento della pagina.
+      Una volta terminato, utilizza i pulsanti in basso per copiare o inviare la selezione.
+    </p>
+  </section>
+
+  <section class="gallery-instructions">
+    <h2>Informazioni e prezzi</h2>
+
+    <p>
+      Le fotografie del saggio vengono fornite esclusivamente in formato digitale ad alta risoluzione.
+    </p>
+
+    <ul>
+      <li><strong>Fino a 4 fotografie selezionate:</strong> 4€ per fotografia</li>
+      <li><strong>Dalla 5ª fotografia in poi:</strong> 3€ per fotografia</li>
+    </ul>
+
+    <p>
+      Dopo aver inviato la selezione delle immagini desiderate, riceverò automaticamente il vostro ordine con l'elenco delle fotografie scelte.
+    </p>
+
+    <p>
+      Risponderò personalmente all'email ricevuta indicando le modalità di pagamento e le informazioni per la consegna dei file digitali.
+    </p>
+  </section>
+
+  <section class="private-gallery">
+
+    {% for photo in dance2026 %}
+
+    <figure class="private-photo {{ photo.class }} reveal" data-photo-id="{{ photo.filename }}">
+      <img
+        src="{{ photo.src }}"
+        alt="{{ photo.alt }}"
+        loading="lazy"
+        decoding="async"
+        class="lightbox-image"
+        data-full="{{ photo.src }}"
+        data-title=""
+      >
+
+      <button class="select-photo" type="button" aria-label="Select photo"></button>
+    </figure>
+
+    {% endfor %}
+
+  </section>
+
+  <div class="selection-bar" id="selectionBar">
+    <span id="selectionCount">0 photos selected</span>
+
+    <div class="selection-actions">
+      <button type="button" id="clearSelection">Clear</button>
+      <button type="button" id="copySelection">Copy Selection</button>
+      <button type="button" id="sendSelection">Send Selection</button>
+    </div>
   </div>
-</div>
 
 </div>
-

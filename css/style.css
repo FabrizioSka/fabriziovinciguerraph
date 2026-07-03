@@ -559,6 +559,29 @@ h1 {
   margin-bottom: 10px;
 }
 
+/* FOOTER SIGNATURE */
+
+.footer-signature {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 70px;
+}
+
+.footer-signature {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 70px;
+}
+
+.footer-signature img {
+  width: 520px !important;
+  max-width: 90vw;
+  height: auto;
+  display: block;
+  opacity: 0.92;
+}
 
 /* FOOTER */
 
@@ -665,7 +688,15 @@ h1 {
   opacity: .8;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE MOBILE */
+
+.footer-signature {
+  margin-bottom: 50px;
+}
+
+.footer-signature img {
+  width: 280px;
+}
 
 @media (max-width: 768px) {
   .site-header {

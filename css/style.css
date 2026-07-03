@@ -694,9 +694,6 @@ h1 {
   margin-bottom: 50px;
 }
 
-.footer-signature img {
-  width: 280px;
-}
 
 @media (max-width: 768px) {
   .site-header {
@@ -938,5 +935,10 @@ h1 {
   grid-template-columns: 1fr;
   gap: 42px;
 }
+.footer-signature img {
+  width: 210px !important;
+  max-width: 65vw;
+}
+
 
 }

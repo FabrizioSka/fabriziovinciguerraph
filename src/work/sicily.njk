@@ -1,7 +1,7 @@
 ---
 layout: layout.njk
 title: "Sicily | Fabrizio Vinciguerra"
-description: "Fine art landscape photography collection exploring Sicily through memory, light, volcanic earth and Mediterranean atmospheres."
+description: "A personal landscape shaped by volcanic earth, forests, silence and the sea."
 ---
 
 <section class="collection-hero">
@@ -10,42 +10,67 @@ description: "Fine art landscape photography collection exploring Sicily through
   <div class="collection-hero-content">
     <p class="subtitle">Collection 03</p>
     <h1>Sicily</h1>
-    <p>A personal landscape shaped by memory, light and volcanic earth.</p>
+    <p>A land shaped by fire, silence and memory.</p>
   </div>
 </section>
 
-<section class="fine-art-story">
+<section class="fine-art-story waterfall-story">
 
-  <div class="story-text">
+  <div class="travel-quote reveal">
     <p>
-      A land of lava, ancient forests and Mediterranean light.
+      Sicily is not a place.<br>
+      It is a landscape that never stops changing.
     </p>
   </div>
 
-  {% for photo in sicily %}
-    <figure class="story-image {{ photo.class }} reveal">
-      <img 
-  src="{{ photo.src }}" 
-  alt="{{ photo.alt }}"
-   loading="lazy"
-   decoding="async"
-  class="lightbox-image"
-  data-full="{{ photo.src }}"
-  data-title=""
->
-    </figure>
-  {% endfor %}
-
-</section>
-
-<section class="fine-art-story">
-
 {% for photo in sicily %}
 
-<figure class="story-image {{ photo.class }} reveal">
-<img src="{{ photo.src }}" alt="{{ photo.alt }}">
-</figure>
+    {% if loop.index == 4 %}
+      <div class="travel-quote reveal">
+        <p>
+          Fire destroys.<br>
+          Nature quietly begins again.
+        </p>
+      </div>
+    {% endif %}
+
+    {% if loop.index == 7 %}
+      <div class="travel-quote reveal">
+        <p>
+          Every forest keeps a silence<br>
+          different from the previous one.
+        </p>
+      </div>
+    {% endif %}
+
+    {% if loop.index == 12 %}
+      <div class="travel-quote reveal">
+        <p>
+          Beyond the volcano,<br>
+          the sea remembers everything.
+        </p>
+      </div>
+    {% endif %}
+
+    <figure class="story-image travel-image {{ photo.class }} reveal">
+      <img
+        src="{{ photo.src }}"
+        alt="{{ photo.alt }}"
+        loading="lazy"
+        decoding="async"
+        class="lightbox-image"
+        data-full="{{ photo.src }}"
+        data-title=""
+      >
+    </figure>
 
 {% endfor %}
+
+<div class="travel-closing reveal">
+  <p>
+    Some places remain inside you.<br>
+    Sicily has always been one of them.
+  </p>
+</div>
 
 </section>

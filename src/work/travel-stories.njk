@@ -5,7 +5,10 @@ description: "Fine art travel photography collection exploring landscapes, citie
 ---
 
 <section class="collection-hero">
-  <img src="/assets/images/travel.jpg" alt="Travel Stories">
+  <img
+    src="/assets/images/travel.jpg"
+    alt="Travel Stories"
+  >
 
   <div class="collection-hero-content">
     <p class="subtitle">Collection 04</p>
@@ -14,39 +17,92 @@ description: "Fine art travel photography collection exploring landscapes, citie
   </div>
 </section>
 
+<section class="fine-art-story travel-story">
 
-<section class="fine-art-story">
-
-  <div class="story-text">
+  <div class="travel-quote reveal">
     <p>
       Every journey begins long before the photograph.
     </p>
   </div>
 
   {% for photo in travel %}
-    <figure class="story-image {{ photo.class }} reveal">
-      <img 
-  src="{{ photo.src }}" 
-  alt="{{ photo.alt }}"
-     loading="lazy"
-   decoding="async"
-  class="lightbox-image"
-  data-full="{{ photo.src }}"
-  data-title=""
-    >
+
+    {% if loop.index == 1 %}
+      <p class="travel-location reveal">
+        Cappadocia · Türkiye
+      </p>
+    {% endif %}
+
+    {% if loop.index == 5 %}
+      <div class="travel-quote reveal">
+        <p>
+          Some places ask to be explored.<br>
+          Others ask you to stop.
+        </p>
+      </div>
+
+      <p class="travel-location reveal">
+        Switzerland
+      </p>
+    {% endif %}
+
+    {% if loop.index == 9 %}
+      <div class="travel-quote reveal">
+        <p>
+          Silence isn't empty.<br>
+          It is full of everything we forget to hear.
+        </p>
+      </div>
+
+      <p class="travel-location reveal">
+        Iceland
+      </p>
+    {% endif %}
+
+    {% if loop.index == 15 %}
+      <div class="travel-quote reveal">
+        <p>
+          The strongest landscapes leave the quietest memories.
+        </p>
+      </div>
+
+      <p class="travel-location reveal">
+        Vienna · Austria
+      </p>
+    {% endif %}
+
+    {% if loop.index == 18 %}
+      <div class="travel-quote reveal">
+        <p>
+          Every city tells a story.<br>
+          Some whisper instead of shouting.
+        </p>
+      </div>
+
+      <p class="travel-location reveal">
+        Amsterdam · Netherlands
+      </p>
+    {% endif %}
+
+    <figure class="story-image travel-image {{ photo.class }} reveal">
+      <img
+        src="{{ photo.src }}"
+        alt="{{ photo.alt }}"
+        loading="lazy"
+        decoding="async"
+        class="lightbox-image"
+        data-full="{{ photo.src }}"
+        data-title=""
+      >
     </figure>
+
   {% endfor %}
 
-</section>
-
-<section class="fine-art-story">
-
-{% for photo in travel %}
-
-<figure class="story-image {{ photo.class }} reveal">
-<img src="{{ photo.src }}" alt="{{ photo.alt }}">
-</figure>
-
-{% endfor %}
+  <div class="travel-closing reveal">
+    <p>
+      The journey ends.<br>
+      The memory remains.
+    </p>
+  </div>
 
 </section>

@@ -458,6 +458,77 @@ h1 {
   max-width: 760px;
 }
 
+/* TRAVEL STORIES */
+
+.travel-story {
+  padding-top: 150px;
+}
+
+.travel-quote {
+  max-width: 920px;
+  margin: 190px auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.travel-quote:first-child {
+  margin-top: 20px;
+}
+
+.travel-quote p {
+  color: var(--color-gold);
+  font-size: clamp(34px, 4.6vw, 72px);
+  line-height: 1.15;
+}
+
+.travel-location {
+  margin: 0 auto 65px;
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+.travel-image {
+  max-width: 1250px;
+  margin: 0 auto 110px;
+}
+
+.travel-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Verticali interamente visibili su desktop */
+.travel-image.private-portrait,
+.travel-image.story-portrait {
+  max-width: 680px;
+}
+
+.travel-image.private-portrait img,
+.travel-image.story-portrait img {
+  width: auto;
+  max-width: 100%;
+  max-height: 78vh;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.travel-closing {
+  max-width: 920px;
+  margin: 230px auto 80px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.travel-closing p {
+  color: var(--color-gold);
+  font-size: clamp(42px, 5vw, 82px);
+  line-height: 1.1;
+}
+
 /* ABOUT */
 
 .about-hero {
@@ -940,5 +1011,52 @@ h1 {
   max-width: 65vw;
 }
 
+.travel-story {
+  padding-top: 90px;
+}
+
+.travel-quote {
+  margin: 120px auto;
+  padding: 0 7%;
+}
+
+.travel-quote:first-child {
+  margin-top: 10px;
+}
+
+.travel-quote p {
+  font-size: clamp(30px, 8vw, 44px);
+  line-height: 1.2;
+}
+
+.travel-location {
+  margin-bottom: 45px;
+  padding: 0 7%;
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+.travel-image {
+  margin-bottom: 75px;
+}
+
+.travel-image.private-portrait,
+.travel-image.story-portrait {
+  max-width: 82vw;
+}
+
+.travel-image.private-portrait img,
+.travel-image.story-portrait img {
+  max-height: 72vh;
+}
+
+.travel-closing {
+  margin: 150px auto 50px;
+  padding: 0 7%;
+}
+
+.travel-closing p {
+  font-size: clamp(36px, 10vw, 54px);
+}
 
 }

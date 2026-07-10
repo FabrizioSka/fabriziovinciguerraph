@@ -14,26 +14,63 @@ description: "Fine art landscape photography collection exploring waterfalls, mo
   </div>
 </section>
 
-<section class="fine-art-story">
-
-  <div class="story-text">
-    <p>
-      Water is never still. It moves, carves, disappears and returns, carrying light through the landscape.
-    </p>
-  </div>
+<section class="fine-art-story waterfall-story">
 
   {% for photo in waterfalls %}
-    <figure class="story-image {{ photo.class }} reveal">
-      <img 
-  src="{{ photo.src }}" 
-  alt="{{ photo.alt }}"
-     loading="lazy"
-   decoding="async"
-  class="lightbox-image"
-  data-full="{{ photo.src }}"
-  data-title=""
-    >
-    </figure>
+
+    {% if loop.index == 1 %}
+
+      <figure class="story-image travel-image {{ photo.class }} reveal">
+        <img
+          src="{{ photo.src }}"
+          alt="{{ photo.alt }}"
+          loading="lazy"
+          decoding="async"
+          class="lightbox-image"
+          data-full="{{ photo.src }}"
+          data-title=""
+        >
+      </figure>
+
+      <div class="travel-quote reveal">
+        <p>
+          Water is never still.<br>
+          It shapes stone, carries light and quietly rewrites the landscape.
+        </p>
+      </div>
+
+    {% else %}
+
+      {% if loop.index == 6 %}
+        <div class="travel-quote reveal">
+          <p>
+            Every waterfall is different.<br>
+            Yet they all speak the same language.
+          </p>
+        </div>
+      {% endif %}
+
+      <figure class="story-image travel-image {{ photo.class }} reveal">
+        <img
+          src="{{ photo.src }}"
+          alt="{{ photo.alt }}"
+          loading="lazy"
+          decoding="async"
+          class="lightbox-image"
+          data-full="{{ photo.src }}"
+          data-title=""
+        >
+      </figure>
+
+    {% endif %}
+
   {% endfor %}
+
+  <div class="travel-closing reveal">
+    <p>
+      Long after the sound has faded,<br>
+      the landscape continues to speak.
+    </p>
+  </div>
 
 </section>

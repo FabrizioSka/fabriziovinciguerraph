@@ -2,9 +2,15 @@
 layout: layout.njk
 title: "Travel Stories | Fine Art Travel Photography | Fabrizio Vinciguerra"
 description: "Fine art travel photography by Fabrizio Vinciguerra, exploring Iceland, Cappadocia, Switzerland, Vienna and Amsterdam through light, atmosphere and visual storytelling."
-ogImage: "https://www.fabriziovinciguerraph.com/assets/images/social/og-image.jpg"
+ogImage: "https://www.fabriziovinciguerraph.com/assets/images/travel.jpg"
 ogImageAlt: "Fine art travel photography by Fabrizio Vinciguerra"
 ---
+
+{% set gallery = travel %}
+{% set galleryName = "Travel Stories — Fine Art Travel Photography" %}
+{% set galleryDescription = "A fine art travel photography collection exploring Cappadocia, Switzerland, Iceland, Vienna and Amsterdam through landscapes, cities, atmosphere and quiet encounters." %}
+
+{% include "image-gallery-schema.njk" %}
 
 <section class="collection-hero">
 
@@ -14,6 +20,7 @@ ogImageAlt: "Fine art travel photography by Fabrizio Vinciguerra"
   >
 
   <div class="collection-hero-content">
+
     <p class="subtitle">Collection 04</p>
 
     <h1>Travel Stories</h1>
@@ -37,12 +44,15 @@ ogImageAlt: "Fine art travel photography by Fabrizio Vinciguerra"
   {% for photo in travel %}
 
     {% if loop.index == 1 %}
+
       <p class="travel-location reveal">
         Cappadocia · Türkiye
       </p>
+
     {% endif %}
 
     {% if loop.index == 5 %}
+
       <div class="travel-quote reveal">
         <p>
           Some places ask to be explored.<br>
@@ -53,9 +63,11 @@ ogImageAlt: "Fine art travel photography by Fabrizio Vinciguerra"
       <p class="travel-location reveal">
         Switzerland
       </p>
+
     {% endif %}
 
     {% if loop.index == 9 %}
+
       <div class="travel-quote reveal">
         <p>
           Silence isn't empty.<br>
@@ -66,9 +78,11 @@ ogImageAlt: "Fine art travel photography by Fabrizio Vinciguerra"
       <p class="travel-location reveal">
         Iceland
       </p>
+
     {% endif %}
 
     {% if loop.index == 15 %}
+
       <div class="travel-quote reveal">
         <p>
           The strongest landscapes leave the quietest memories.
@@ -78,9 +92,11 @@ ogImageAlt: "Fine art travel photography by Fabrizio Vinciguerra"
       <p class="travel-location reveal">
         Vienna · Austria
       </p>
+
     {% endif %}
 
     {% if loop.index == 18 %}
+
       <div class="travel-quote reveal">
         <p>
           Every city tells a story.<br>
@@ -91,6 +107,7 @@ ogImageAlt: "Fine art travel photography by Fabrizio Vinciguerra"
       <p class="travel-location reveal">
         Amsterdam · Netherlands
       </p>
+
     {% endif %}
 
     <figure class="story-image travel-image {{ photo.class }} reveal">
@@ -102,7 +119,7 @@ ogImageAlt: "Fine art travel photography by Fabrizio Vinciguerra"
         decoding="async"
         class="lightbox-image"
         data-full="{{ photo.src }}"
-        data-title=""
+        data-title="{{ photo.title }}"
       >
 
     </figure>

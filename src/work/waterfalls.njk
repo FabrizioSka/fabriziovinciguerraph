@@ -2,9 +2,15 @@
 layout: layout.njk
 title: "Waterfalls | Fine Art Waterfall Photography | Fabrizio Vinciguerra"
 description: "Fine art waterfall photography by Fabrizio Vinciguerra, exploring the quiet relationship between flowing water, light, movement and time through long exposure landscapes."
-ogImage: "https://www.fabriziovinciguerraph.com/assets/images/social/og-image.jpg"
+ogImage: "https://www.fabriziovinciguerraph.com/assets/images/waterfalls.jpg"
 ogImageAlt: "Fine art waterfall photography by Fabrizio Vinciguerra"
 ---
+
+{% set gallery = waterfalls %}
+{% set galleryName = "Waterfalls — Fine Art Landscape Photography" %}
+{% set galleryDescription = "A fine art photography collection exploring waterfalls, flowing water, forest landscapes, light, movement and the passage of time." %}
+
+{% include "image-gallery-schema.njk" %}
 
 <section class="collection-hero">
 
@@ -40,7 +46,7 @@ ogImageAlt: "Fine art waterfall photography by Fabrizio Vinciguerra"
           decoding="async"
           class="lightbox-image"
           data-full="{{ photo.src }}"
-          data-title=""
+          data-title="{{ photo.title }}"
         >
 
       </figure>
@@ -74,7 +80,7 @@ ogImageAlt: "Fine art waterfall photography by Fabrizio Vinciguerra"
           decoding="async"
           class="lightbox-image"
           data-full="{{ photo.src }}"
-          data-title=""
+          data-title="{{ photo.title }}"
         >
 
       </figure>

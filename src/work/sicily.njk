@@ -5,6 +5,11 @@ description: "Fine art landscape photography from Sicily by Fabrizio Vinciguerra
 ogImage: "https://www.fabriziovinciguerraph.com/assets/images/social/og-image.jpg"
 ogImageAlt: "Fine art landscape photography from Sicily by Fabrizio Vinciguerra"
 ---
+{% set gallery = sicily %}
+{% set galleryName = "Sicily — Fine Art Landscape Photography" %}
+{% set galleryDescription = "A fine art photography collection exploring Mount Etna, forests, volcanic landscapes, snow and the Aeolian Islands." %}
+
+{% include "image-gallery-schema.njk" %}
 
 <section class="collection-hero">
   <img
@@ -70,7 +75,7 @@ ogImageAlt: "Fine art landscape photography from Sicily by Fabrizio Vinciguerra"
         decoding="async"
         class="lightbox-image"
         data-full="{{ photo.src }}"
-        data-title=""
+        data-title="{{ photo.title }}"
       >
 
     </figure>

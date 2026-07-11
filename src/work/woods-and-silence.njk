@@ -6,6 +6,12 @@ ogImage: "https://www.fabriziovinciguerraph.com/assets/images/woods.jpg"
 ogImageAlt: "Ancient trees and filtered light from the Woods and Silence fine art photography collection"
 ---
 
+{% set gallery = woods %}
+{% set galleryName = "Woods & Silence — Fine Art Forest Photography" %}
+{% set galleryDescription = "A fine art photography collection exploring ancient trees, forests, woodland light, silence and memory." %}
+
+{% include "image-gallery-schema.njk" %}
+
 <section class="collection-hero">
 
   <img
@@ -39,21 +45,25 @@ ogImageAlt: "Ancient trees and filtered light from the Woods and Silence fine ar
   {% for photo in woods %}
 
     {% if loop.index == 4 %}
+
       <div class="travel-quote reveal">
         <p>
           Every forest speaks differently.<br>
           Some through shadow, others through light.
         </p>
       </div>
+
     {% endif %}
 
     {% if loop.index == 7 %}
+
       <div class="travel-quote reveal">
         <p>
           The oldest trees do not ask to be noticed.<br>
           They simply remain.
         </p>
       </div>
+
     {% endif %}
 
     <figure class="story-image travel-image {{ photo.class }} reveal">
@@ -65,7 +75,7 @@ ogImageAlt: "Ancient trees and filtered light from the Woods and Silence fine ar
         decoding="async"
         class="lightbox-image"
         data-full="{{ photo.src }}"
-        data-title=""
+        data-title="{{ photo.title }}"
       >
 
     </figure>

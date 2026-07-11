@@ -1,9 +1,9 @@
 ---
 layout: layout.njk
 title: "Woods & Silence | Fine Art Forest Photography | Fabrizio Vinciguerra"
-description: "Fine art forest photography by Fabrizio Vinciguerra, exploring woodland silence, mist, reflections and the intimate relationship between light, shadow and nature."
-ogImage: "https://www.fabriziovinciguerraph.com/assets/images/social/og-image.jpg"
-ogImageAlt: "Fine art forest photography from the Woods and Silence collection by Fabrizio Vinciguerra"
+description: "Fine art forest photography by Fabrizio Vinciguerra, exploring woodland silence, ancient trees, filtered light and the intimate relationship between nature and memory."
+ogImage: "https://www.fabriziovinciguerraph.com/assets/images/woods.jpg"
+ogImageAlt: "Ancient trees and filtered light from the Woods and Silence fine art photography collection"
 ---
 
 <section class="collection-hero">
@@ -27,20 +27,36 @@ ogImageAlt: "Fine art forest photography from the Woods and Silence collection b
 
 </section>
 
-<section class="fine-art-story">
+<section class="fine-art-story waterfall-story">
 
-  <div class="story-text">
-
+  <div class="travel-quote reveal">
     <p>
-      In the quiet of the woods, light becomes slower.
-      Every branch, shadow and reflection seems to hold its breath.
+      Some trees become landscapes themselves.<br>
+      Their branches hold time, silence and memory.
     </p>
-
   </div>
 
   {% for photo in woods %}
 
-    <figure class="story-image {{ photo.class }} reveal">
+    {% if loop.index == 4 %}
+      <div class="travel-quote reveal">
+        <p>
+          Every forest speaks differently.<br>
+          Some through shadow, others through light.
+        </p>
+      </div>
+    {% endif %}
+
+    {% if loop.index == 7 %}
+      <div class="travel-quote reveal">
+        <p>
+          The oldest trees do not ask to be noticed.<br>
+          They simply remain.
+        </p>
+      </div>
+    {% endif %}
+
+    <figure class="story-image travel-image {{ photo.class }} reveal">
 
       <img
         src="{{ photo.src }}"
@@ -55,5 +71,12 @@ ogImageAlt: "Fine art forest photography from the Woods and Silence collection b
     </figure>
 
   {% endfor %}
+
+  <div class="travel-closing reveal">
+    <p>
+      In the quiet of the woods,<br>
+      even time learns to slow down.
+    </p>
+  </div>
 
 </section>

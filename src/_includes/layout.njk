@@ -3,57 +3,145 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ title }}</title>
+  {% set canonicalUrl = "https://www.fabriziovinciguerraph.com" + page.url %}
+  {% set socialImage = ogImage or "https://www.fabriziovinciguerraph.com/assets/images/social/og-image.jpg" %}
 
-    <meta name="description" content="{{ description }}">
-    <link rel="canonical" href="https://www.fabriziovinciguerraph.com{{ page.url }}">
-    <meta property="og:title" content="{{ title }}">
-    <meta property="og:description" content="{{ description }}">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="/assets/images/social/og-image.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ title }}">
-    <meta name="twitter:description" content="{{ description }}">
-    <meta name="twitter:image" content="/assets/images/social/og-image.jpg">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="/assets/favicon/favicon.png">
-    <link rel="preload" as="image" href="/assets/images/home.jpg">
-    
+  <title>{{ title }}</title>
 
-    {% if robots %}
+  <meta name="description" content="{{ description }}">
+  <meta name="author" content="Fabrizio Vinciguerra">
+
+  {% if robots %}
     <meta name="robots" content="{{ robots }}">
-    {% endif %}
+  {% else %}
+    <meta name="robots" content="index, follow, max-image-preview:large">
+  {% endif %}
 
-    <link rel="stylesheet" href="/css/style.css">
+  <link rel="canonical" href="{{ canonicalUrl }}">
+
+  <!-- OPEN GRAPH -->
+
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:url" content="{{ canonicalUrl }}">
+  <meta property="og:site_name" content="Fabrizio Vinciguerra Photography">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="{{ socialImage }}">
+  <meta
+    property="og:image:alt"
+    content="{{ ogImageAlt or 'Fine art landscape photography by Fabrizio Vinciguerra' }}"
+  >
+
+  <!-- TWITTER / X -->
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{ socialImage }}">
+  <meta
+    name="twitter:image:alt"
+    content="{{ ogImageAlt or 'Fine art landscape photography by Fabrizio Vinciguerra' }}"
+  >
+
+  <!-- FAVICON -->
+
+  <link rel="icon" type="image/png" href="/assets/favicon/favicon.png">
+
+  <!-- PERFORMANCE -->
+
+  {% if page.url == "/" %}
+    <link rel="preload" as="image" href="/assets/images/home.jpg">
+  {% endif %}
+
+  <!-- STRUCTURED DATA -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.fabriziovinciguerraph.com/#website",
+        "url": "https://www.fabriziovinciguerraph.com/",
+        "name": "Fabrizio Vinciguerra Photography",
+        "description": "Fine art landscape photography exploring light, silence, nature and memory.",
+        "inLanguage": "en",
+        "publisher": {
+          "@id": "https://www.fabriziovinciguerraph.com/#fabrizio-vinciguerra"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.fabriziovinciguerraph.com/#fabrizio-vinciguerra",
+        "name": "Fabrizio Vinciguerra",
+        "url": "https://www.fabriziovinciguerraph.com/",
+        "jobTitle": "Fine Art Landscape Photographer",
+        "description": "Sicilian fine art landscape photographer and visual storyteller exploring light, silence, volcanic landscapes and memory.",
+        "knowsAbout": [
+          "Fine art landscape photography",
+          "Sicilian landscape photography",
+          "Volcanic landscape photography",
+          "Nature photography",
+          "Travel photography",
+          "Visual storytelling"
+        ],
+        "nationality": {
+          "@type": "Country",
+          "name": "Italy"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "{{ canonicalUrl }}#webpage",
+        "url": "{{ canonicalUrl }}",
+        "name": "{{ title }}",
+        "description": "{{ description }}",
+        "isPartOf": {
+          "@id": "https://www.fabriziovinciguerraph.com/#website"
+        },
+        "about": {
+          "@id": "https://www.fabriziovinciguerraph.com/#fabrizio-vinciguerra"
+        },
+        "inLanguage": "en"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="stylesheet" href="/css/style.css">
 
 </head>
 
 <body>
 
-{% include "header.njk" %}
+  {% include "header.njk" %}
 
-<main>
+  <main>
 
-{{ content | safe }}
+    {{ content | safe }}
 
-</main>
+  </main>
 
-{% include "footer.njk" %}
+  {% include "footer.njk" %}
 
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" aria-label="Close">×</button>
-  <button class="lightbox-prev" aria-label="Previous">‹</button>
-  <img src="" alt="">
-  <button class="lightbox-next" aria-label="Next">›</button>
-  <div class="lightbox-caption"></div>
-  <div class="lightbox-counter" id="lightboxCounter"></div>
-</div>
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">×</button>
+    <button class="lightbox-prev" aria-label="Previous photograph">‹</button>
 
-<script src="/js/main.js"></script>
-<script src="/js/private-gallery.js"></script>
+    <img src="" alt="">
+
+    <button class="lightbox-next" aria-label="Next photograph">›</button>
+
+    <div class="lightbox-caption"></div>
+    <div class="lightbox-counter" id="lightboxCounter"></div>
+  </div>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/private-gallery.js"></script>
 
 </body>
 

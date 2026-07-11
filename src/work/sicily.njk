@@ -1,16 +1,25 @@
 ---
 layout: layout.njk
-title: "Sicily | Fabrizio Vinciguerra"
-description: "A personal landscape shaped by volcanic earth, forests, silence and the sea."
+title: "Sicily | Fine Art Landscape Photography | Fabrizio Vinciguerra"
+description: "Fine art landscape photography from Sicily by Fabrizio Vinciguerra, exploring Mount Etna, forests, volcanic landscapes, the sea and the quiet relationship between light and memory."
+ogImage: "https://www.fabriziovinciguerraph.com/assets/images/social/og-image.jpg"
+ogImageAlt: "Fine art landscape photography from Sicily by Fabrizio Vinciguerra"
 ---
 
 <section class="collection-hero">
-  <img src="/assets/images/sicily.jpg" alt="Sicily">
+  <img
+    src="/assets/images/sicily.jpg"
+    alt="Volcanic landscape in Sicily photographed by Fabrizio Vinciguerra"
+  >
 
   <div class="collection-hero-content">
     <p class="subtitle">Collection 03</p>
+
     <h1>Sicily</h1>
-    <p>A land shaped by fire, silence and memory.</p>
+
+    <p>
+      A land shaped by fire, silence and memory.
+    </p>
   </div>
 </section>
 
@@ -53,6 +62,7 @@ description: "A personal landscape shaped by volcanic earth, forests, silence an
     {% endif %}
 
     <figure class="story-image travel-image {{ photo.class }} reveal">
+
       <img
         src="{{ photo.src }}"
         alt="{{ photo.alt }}"
@@ -62,6 +72,7 @@ description: "A personal landscape shaped by volcanic earth, forests, silence an
         data-full="{{ photo.src }}"
         data-title=""
       >
+
     </figure>
 
 {% endfor %}

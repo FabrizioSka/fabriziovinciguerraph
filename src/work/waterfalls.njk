@@ -1,17 +1,28 @@
 ---
 layout: layout.njk
-title: "Waterfalls | Fabrizio Vinciguerra"
-description: "Fine art landscape photography collection exploring waterfalls, movement, stillness and the passage of time."
+title: "Waterfalls | Fine Art Waterfall Photography | Fabrizio Vinciguerra"
+description: "Fine art waterfall photography by Fabrizio Vinciguerra, exploring the quiet relationship between flowing water, light, movement and time through long exposure landscapes."
+ogImage: "https://www.fabriziovinciguerraph.com/assets/images/social/og-image.jpg"
+ogImageAlt: "Fine art waterfall photography by Fabrizio Vinciguerra"
 ---
 
 <section class="collection-hero">
-  <img src="/assets/images/waterfalls.jpg" alt="Waterfalls">
+
+  <img
+    src="/assets/images/waterfalls.jpg"
+    alt="Fine art waterfall landscape photographed by Fabrizio Vinciguerra"
+  >
 
   <div class="collection-hero-content">
     <p class="subtitle">Collection 02</p>
+
     <h1>Waterfalls</h1>
-    <p>Where movement meets stillness.</p>
+
+    <p>
+      Where movement meets stillness.
+    </p>
   </div>
+
 </section>
 
 <section class="fine-art-story waterfall-story">
@@ -21,6 +32,7 @@ description: "Fine art landscape photography collection exploring waterfalls, mo
     {% if loop.index == 1 %}
 
       <figure class="story-image travel-image {{ photo.class }} reveal">
+
         <img
           src="{{ photo.src }}"
           alt="{{ photo.alt }}"
@@ -30,6 +42,7 @@ description: "Fine art landscape photography collection exploring waterfalls, mo
           data-full="{{ photo.src }}"
           data-title=""
         >
+
       </figure>
 
       <div class="travel-quote reveal">
@@ -42,15 +55,18 @@ description: "Fine art landscape photography collection exploring waterfalls, mo
     {% else %}
 
       {% if loop.index == 6 %}
+
         <div class="travel-quote reveal">
           <p>
             Every waterfall is different.<br>
             Yet they all speak the same language.
           </p>
         </div>
+
       {% endif %}
 
       <figure class="story-image travel-image {{ photo.class }} reveal">
+
         <img
           src="{{ photo.src }}"
           alt="{{ photo.alt }}"
@@ -60,6 +76,7 @@ description: "Fine art landscape photography collection exploring waterfalls, mo
           data-full="{{ photo.src }}"
           data-title=""
         >
+
       </figure>
 
     {% endif %}

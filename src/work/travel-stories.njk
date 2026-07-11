@@ -1,20 +1,29 @@
 ---
 layout: layout.njk
-title: "Travel Stories | Fabrizio Vinciguerra"
-description: "Fine art travel photography collection exploring landscapes, cities and quiet journeys around the world."
+title: "Travel Stories | Fine Art Travel Photography | Fabrizio Vinciguerra"
+description: "Fine art travel photography by Fabrizio Vinciguerra, exploring Iceland, Cappadocia, Switzerland, Vienna and Amsterdam through light, atmosphere and visual storytelling."
+ogImage: "https://www.fabriziovinciguerraph.com/assets/images/social/og-image.jpg"
+ogImageAlt: "Fine art travel photography by Fabrizio Vinciguerra"
 ---
 
 <section class="collection-hero">
+
   <img
     src="/assets/images/travel.jpg"
-    alt="Travel Stories"
+    alt="Fine art travel landscape photographed by Fabrizio Vinciguerra"
   >
 
   <div class="collection-hero-content">
     <p class="subtitle">Collection 04</p>
+
     <h1>Travel Stories</h1>
-    <p>Fragments of distant places, quiet journeys and unexpected light.</p>
+
+    <p>
+      Fragments of distant places, quiet journeys and unexpected light.
+    </p>
+
   </div>
+
 </section>
 
 <section class="fine-art-story travel-story">
@@ -85,6 +94,7 @@ description: "Fine art travel photography collection exploring landscapes, citie
     {% endif %}
 
     <figure class="story-image travel-image {{ photo.class }} reveal">
+
       <img
         src="{{ photo.src }}"
         alt="{{ photo.alt }}"
@@ -94,6 +104,7 @@ description: "Fine art travel photography collection exploring landscapes, citie
         data-full="{{ photo.src }}"
         data-title=""
       >
+
     </figure>
 
   {% endfor %}

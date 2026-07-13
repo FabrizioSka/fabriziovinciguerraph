@@ -12,6 +12,23 @@ ogImageAlt: "Fine art travel photography by Fabrizio Vinciguerra"
 
 {% include "image-gallery-schema.njk" %}
 
+{% set breadcrumbItems = [
+  {
+    name: "Home",
+    url: "https://www.fabriziovinciguerraph.com/"
+  },
+  {
+    name: "Work",
+    url: "https://www.fabriziovinciguerraph.com/work/"
+  },
+  {
+    name: "Travel Stories",
+    url: "https://www.fabriziovinciguerraph.com/work/travel-stories/"
+  }
+] %}
+
+{% include "breadcrumb-schema.njk" %}
+
 <section class="collection-hero">
 
   <img

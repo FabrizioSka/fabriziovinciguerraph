@@ -12,6 +12,23 @@ ogImageAlt: "Fine art waterfall photography by Fabrizio Vinciguerra"
 
 {% include "image-gallery-schema.njk" %}
 
+{% set breadcrumbItems = [
+  {
+    name: "Home",
+    url: "https://www.fabriziovinciguerraph.com/"
+  },
+  {
+    name: "Work",
+    url: "https://www.fabriziovinciguerraph.com/work/"
+  },
+  {
+    name: "Waterfalls",
+    url: "https://www.fabriziovinciguerraph.com/work/waterfalls/"
+  }
+] %}
+
+{% include "breadcrumb-schema.njk" %}
+
 <section class="collection-hero">
 
   <img
@@ -20,6 +37,7 @@ ogImageAlt: "Fine art waterfall photography by Fabrizio Vinciguerra"
   >
 
   <div class="collection-hero-content">
+
     <p class="subtitle">Collection 02</p>
 
     <h1>Waterfalls</h1>
@@ -27,6 +45,7 @@ ogImageAlt: "Fine art waterfall photography by Fabrizio Vinciguerra"
     <p>
       Where movement meets stillness.
     </p>
+
   </div>
 
 </section>
@@ -52,10 +71,12 @@ ogImageAlt: "Fine art waterfall photography by Fabrizio Vinciguerra"
       </figure>
 
       <div class="travel-quote reveal">
+
         <p>
           Water is never still.<br>
           It shapes stone, carries light and quietly rewrites the landscape.
         </p>
+
       </div>
 
     {% else %}
@@ -63,10 +84,12 @@ ogImageAlt: "Fine art waterfall photography by Fabrizio Vinciguerra"
       {% if loop.index == 6 %}
 
         <div class="travel-quote reveal">
+
           <p>
             Every waterfall is different.<br>
             Yet they all speak the same language.
           </p>
+
         </div>
 
       {% endif %}
@@ -90,10 +113,12 @@ ogImageAlt: "Fine art waterfall photography by Fabrizio Vinciguerra"
   {% endfor %}
 
   <div class="travel-closing reveal">
+
     <p>
       Long after the sound has faded,<br>
       the landscape continues to speak.
     </p>
+
   </div>
 
 </section>

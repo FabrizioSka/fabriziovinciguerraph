@@ -12,6 +12,23 @@ ogImageAlt: "Ancient trees and filtered light from the Woods and Silence fine ar
 
 {% include "image-gallery-schema.njk" %}
 
+{% set breadcrumbItems = [
+  {
+    name: "Home",
+    url: "https://www.fabriziovinciguerraph.com/"
+  },
+  {
+    name: "Work",
+    url: "https://www.fabriziovinciguerraph.com/work/"
+  },
+  {
+    name: "Woods & Silence",
+    url: "https://www.fabriziovinciguerraph.com/work/woods-and-silence/"
+  }
+] %}
+
+{% include "breadcrumb-schema.njk" %}
+
 <section class="collection-hero">
 
   <img

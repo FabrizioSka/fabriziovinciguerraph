@@ -11,6 +11,23 @@ ogImageAlt: "Fine art landscape photography from Sicily by Fabrizio Vinciguerra"
 
 {% include "image-gallery-schema.njk" %}
 
+{% set breadcrumbItems = [
+  {
+    name: "Home",
+    url: "https://www.fabriziovinciguerraph.com/"
+  },
+  {
+    name: "Work",
+    url: "https://www.fabriziovinciguerraph.com/work/"
+  },
+  {
+    name: "Sicily",
+    url: "https://www.fabriziovinciguerraph.com/work/sicily/"
+  }
+] %}
+
+{% include "breadcrumb-schema.njk" %}
+
 <section class="collection-hero">
   <img
     src="/assets/images/sicily.jpg"

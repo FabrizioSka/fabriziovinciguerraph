@@ -1,6 +1,6 @@
 (() => {
 
-const galleryPassword = "danza2026";
+const galleryPassword = "danz42oo6";
 const galleryLock = document.querySelector("#galleryLock");
 const privatePage = document.querySelector("#privatePage");
 const passwordInput = document.querySelector("#galleryPassword");

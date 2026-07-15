@@ -1,6 +1,7 @@
 import {
   createSessionToken,
-  createSessionCookie
+  createSessionCookie,
+  readGalleryConfig
 } from "./_lib/auth.js";
 
 const encoder = new TextEncoder();
@@ -12,6 +13,35 @@ function escapeHtml(value = "") {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function getGallerySlugFromPath(pathname) {
+  const match = pathname.match(
+    /^\/private\/([a-z0-9]+(?:-[a-z0-9]+)*)(?:\/|$)/
+  );
+
+  return match ? match[1] : null;
+}
+
+function getSafeReturnTo(value) {
+  if (
+    typeof value !== "string" ||
+    !value.startsWith("/") ||
+    value.startsWith("//")
+  ) {
+    return null;
+  }
+
+  const gallerySlug = getGallerySlugFromPath(value);
+
+  if (!gallerySlug) {
+    return null;
+  }
+
+  return {
+    path: value,
+    gallerySlug
+  };
 }
 
 async function hashValue(value) {
@@ -37,7 +67,10 @@ function safeEqual(first, second) {
   return difference === 0;
 }
 
-async function passwordsMatch(receivedPassword, expectedPassword) {
+async function passwordsMatch(
+  receivedPassword,
+  expectedPassword
+) {
   const [receivedHash, expectedHash] = await Promise.all([
     hashValue(receivedPassword),
     hashValue(expectedPassword)
@@ -46,24 +79,13 @@ async function passwordsMatch(receivedPassword, expectedPassword) {
   return safeEqual(receivedHash, expectedHash);
 }
 
-function getSafeReturnTo(value) {
-  if (
-    typeof value === "string" &&
-    value.startsWith("/") &&
-    !value.startsWith("//") &&
-    (
-      value === "/private" ||
-      value.startsWith("/private/")
-    )
-  ) {
-    return value;
-  }
-
-  return "/private/";
-}
-
-function renderLoginPage(returnTo, showError = false) {
+function renderLoginPage(
+  returnTo,
+  gallerySlug,
+  showError = false
+) {
   const safeReturnTo = escapeHtml(returnTo);
+  const safeGallerySlug = escapeHtml(gallerySlug);
 
   return new Response(
     `<!DOCTYPE html>
@@ -139,7 +161,6 @@ function renderLoginPage(returnTo, showError = false) {
     label {
       display: block;
       margin-bottom: 10px;
-      color: #f2eee8;
       font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -197,10 +218,6 @@ function renderLoginPage(returnTo, showError = false) {
         font-size: 48px;
       }
 
-      .intro {
-        font-size: 17px;
-      }
-
     }
 
   </style>
@@ -233,6 +250,12 @@ function renderLoginPage(returnTo, showError = false) {
         type="hidden"
         name="returnTo"
         value="${safeReturnTo}"
+      >
+
+      <input
+        type="hidden"
+        name="gallery"
+        value="${safeGallerySlug}"
       >
 
       <label for="galleryPassword">
@@ -277,23 +300,50 @@ function renderLoginPage(returnTo, showError = false) {
   );
 }
 
+function galleryNotAvailable() {
+  return new Response(
+    "Private gallery not available.",
+    {
+      status: 404,
+      headers: {
+        "Content-Type": "text/plain; charset=UTF-8",
+        "Cache-Control": "no-store",
+        "X-Robots-Tag": "noindex, nofollow, noimageindex"
+      }
+    }
+  );
+}
+
 export function onRequestGet(context) {
   const url = new URL(context.request.url);
 
-  const returnTo = getSafeReturnTo(
-    url.searchParams.get("returnTo") || "/private/"
+  const returnData = getSafeReturnTo(
+    url.searchParams.get("returnTo") || ""
   );
 
-  return renderLoginPage(returnTo, false);
+  if (!returnData) {
+    return galleryNotAvailable();
+  }
+
+  const galleryConfig = readGalleryConfig(context.env);
+
+  if (
+    typeof galleryConfig[returnData.gallerySlug] !== "string"
+  ) {
+    return galleryNotAvailable();
+  }
+
+  return renderLoginPage(
+    returnData.path,
+    returnData.gallerySlug,
+    false
+  );
 }
 
 export async function onRequestPost(context) {
   const { request, env } = context;
 
-  if (
-    !env.GALLERY_PASSWORD ||
-    !env.GALLERY_SESSION_SECRET
-  ) {
+  if (!env.GALLERY_SESSION_SECRET) {
     return new Response(
       "Private gallery configuration is incomplete.",
       {
@@ -312,28 +362,55 @@ export async function onRequestPost(context) {
     formData.get("password") || ""
   );
 
-  const returnTo = getSafeReturnTo(
+  const returnData = getSafeReturnTo(
     String(formData.get("returnTo") || "")
   );
 
+  const submittedGallery = String(
+    formData.get("gallery") || ""
+  );
+
+  if (
+    !returnData ||
+    submittedGallery !== returnData.gallerySlug
+  ) {
+    return galleryNotAvailable();
+  }
+
+  const galleryConfig = readGalleryConfig(env);
+  const expectedPassword =
+    galleryConfig[returnData.gallerySlug];
+
+  if (typeof expectedPassword !== "string") {
+    return galleryNotAvailable();
+  }
+
   const passwordIsCorrect = await passwordsMatch(
     password,
-    env.GALLERY_PASSWORD
+    expectedPassword
   );
 
   if (!passwordIsCorrect) {
-    return renderLoginPage(returnTo, true);
+    return renderLoginPage(
+      returnData.path,
+      returnData.gallerySlug,
+      true
+    );
   }
 
   const sessionToken = await createSessionToken(
+    returnData.gallerySlug,
     env.GALLERY_SESSION_SECRET
   );
 
   return new Response(null, {
     status: 303,
     headers: {
-      Location: returnTo,
-      "Set-Cookie": createSessionCookie(sessionToken),
+      Location: returnData.path,
+      "Set-Cookie": createSessionCookie(
+        returnData.gallerySlug,
+        sessionToken
+      ),
       "Cache-Control": "no-store"
     }
   });

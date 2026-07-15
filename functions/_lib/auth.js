@@ -1,9 +1,19 @@
-const COOKIE_NAME = "fv_gallery_session";
-
-/* Sessione valida per 2 ore */
-const SESSION_DURATION_SECONDS = 60 * 60 * 2;
+const COOKIE_PREFIX = "fv_gallery_";
+const SESSION_DURATION_SECONDS = 60 * 60 * 2; // 2 ore
 
 const encoder = new TextEncoder();
+
+function isValidGallerySlug(value) {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
+}
+
+function getCookieName(gallerySlug) {
+  if (!isValidGallerySlug(gallerySlug)) {
+    throw new Error("Invalid gallery slug.");
+  }
+
+  return `${COOKIE_PREFIX}${gallerySlug}`;
+}
 
 function bytesToBase64Url(bytes) {
   let binary = "";
@@ -57,13 +67,36 @@ function safeEqual(first, second) {
   return difference === 0;
 }
 
-export function readCookie(request) {
+export function readGalleryConfig(env) {
+  if (!env.GALLERY_CONFIG) {
+    return {};
+  }
+
+  try {
+    const config = JSON.parse(env.GALLERY_CONFIG);
+
+    if (
+      !config ||
+      typeof config !== "object" ||
+      Array.isArray(config)
+    ) {
+      return {};
+    }
+
+    return config;
+  } catch {
+    return {};
+  }
+}
+
+export function readGalleryCookie(request, gallerySlug) {
+  const cookieName = getCookieName(gallerySlug);
   const cookieHeader = request.headers.get("Cookie") || "";
 
   for (const cookie of cookieHeader.split(";")) {
     const [name, ...valueParts] = cookie.trim().split("=");
 
-    if (name === COOKIE_NAME) {
+    if (name === cookieName) {
       return decodeURIComponent(valueParts.join("="));
     }
   }
@@ -71,20 +104,36 @@ export function readCookie(request) {
   return null;
 }
 
-export async function createSessionToken(secret) {
+export async function createSessionToken(
+  gallerySlug,
+  secret
+) {
+  if (!isValidGallerySlug(gallerySlug)) {
+    throw new Error("Invalid gallery slug.");
+  }
+
   const expiresAt =
     Math.floor(Date.now() / 1000) + SESSION_DURATION_SECONDS;
 
+  const signedValue = `${gallerySlug}.${expiresAt}`;
   const signature = await createSignature(
-    String(expiresAt),
+    signedValue,
     secret
   );
 
   return `${expiresAt}.${signature}`;
 }
 
-export async function verifySessionToken(token, secret) {
-  if (!token || !secret) {
+export async function verifySessionToken(
+  token,
+  gallerySlug,
+  secret
+) {
+  if (
+    !token ||
+    !secret ||
+    !isValidGallerySlug(gallerySlug)
+  ) {
     return false;
   }
 
@@ -97,21 +146,34 @@ export async function verifySessionToken(token, secret) {
   const expiresAt = Number(expiresAtText);
   const currentTime = Math.floor(Date.now() / 1000);
 
-  if (!Number.isFinite(expiresAt) || expiresAt <= currentTime) {
+  if (
+    !Number.isFinite(expiresAt) ||
+    expiresAt <= currentTime
+  ) {
     return false;
   }
 
+  const signedValue = `${gallerySlug}.${expiresAtText}`;
+
   const expectedSignature = await createSignature(
-    expiresAtText,
+    signedValue,
     secret
   );
 
-  return safeEqual(receivedSignature, expectedSignature);
+  return safeEqual(
+    receivedSignature,
+    expectedSignature
+  );
 }
 
-export function createSessionCookie(token) {
+export function createSessionCookie(
+  gallerySlug,
+  token
+) {
+  const cookieName = getCookieName(gallerySlug);
+
   return [
-    `${COOKIE_NAME}=${encodeURIComponent(token)}`,
+    `${cookieName}=${encodeURIComponent(token)}`,
     "Path=/",
     `Max-Age=${SESSION_DURATION_SECONDS}`,
     "HttpOnly",
@@ -120,9 +182,11 @@ export function createSessionCookie(token) {
   ].join("; ");
 }
 
-export function clearSessionCookie() {
+export function clearSessionCookie(gallerySlug) {
+  const cookieName = getCookieName(gallerySlug);
+
   return [
-    `${COOKIE_NAME}=`,
+    `${cookieName}=`,
     "Path=/",
     "Max-Age=0",
     "HttpOnly",

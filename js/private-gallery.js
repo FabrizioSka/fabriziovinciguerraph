@@ -1,40 +1,5 @@
 (() => {
 
-const galleryPassword = "danz42oo6";
-const galleryLock = document.querySelector("#galleryLock");
-const privatePage = document.querySelector("#privatePage");
-const passwordInput = document.querySelector("#galleryPassword");
-const unlockButton = document.querySelector("#unlockGallery");
-const galleryError = document.querySelector("#galleryError");
-
-const accessKey = "galleryAccess-" + window.location.pathname;
-
-function unlockGallery() {
-  if (!galleryLock || !privatePage) return;
-
-  galleryLock.style.display = "none";
-  privatePage.classList.remove("is-locked");
-  localStorage.setItem(accessKey, "true");
-}
-
-if (localStorage.getItem(accessKey) === "true") {
-  unlockGallery();
-}
-
-unlockButton?.addEventListener("click", () => {
-  if (passwordInput.value === galleryPassword) {
-    unlockGallery();
-  } else {
-    galleryError.textContent = "Wrong password. Please try again.";
-  }
-});
-
-passwordInput?.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    unlockButton.click();
-  }
-});
-
   const selectablePhotos = Array.from(document.querySelectorAll(".private-photo"));
   const selectionBar = document.querySelector("#selectionBar");
   const selectionCount = document.querySelector("#selectionCount");

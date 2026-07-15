@@ -1198,6 +1198,14 @@ h1 {
   }
 
   .text-link {
+  margin-top: 18px;
+}
+
+.text-link::after {
+  transform: scaleX(1);
+}
+
+  .text-link {
     margin-top: 18px;
   }
 

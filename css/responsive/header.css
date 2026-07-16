@@ -1,0 +1,35 @@
+@media (max-width:768px){
+
+.site-header{
+    position:absolute;
+    height:auto;
+    padding:28px 6% 18px;
+    flex-direction:column;
+    gap:16px;
+}
+
+.brand{
+    justify-content:center;
+}
+
+.brand-mark{
+    font-size:18px;
+}
+
+.brand-name{
+    font-size:9px;
+    letter-spacing:2.6px;
+}
+
+.main-nav{
+    gap:12px 18px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.main-nav a{
+    font-size:9px;
+    letter-spacing:1.8px;
+}
+
+}

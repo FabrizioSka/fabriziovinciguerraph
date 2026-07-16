@@ -1,0 +1,14 @@
+:root {
+  --color-black: #090909;
+  --color-white: #f2eee8;
+  --color-muted: rgba(242, 238, 232, 0.72);
+  --color-gold: #c8b89f;
+
+  --space-page: 6%;
+  --header-height: 78px;
+
+  --font-serif: Georgia, "Times New Roman", serif;
+
+  --transition-medium: 0.4s ease;
+  --transition-slow: 0.8s ease;
+}

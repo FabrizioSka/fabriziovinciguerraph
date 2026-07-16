@@ -1,0 +1,45 @@
+@media (max-width:768px){
+
+.page-hero{
+    padding:180px 7% 90px;
+}
+
+.page-hero h1{
+    font-size:clamp(52px,15vw,78px);
+}
+
+.page-hero p{
+    font-size:20px;
+}
+
+.collection-hero-content{
+    left:7%;
+    right:7%;
+    bottom:70px;
+}
+
+.collection-hero-content h1{
+    font-size:clamp(52px,14vw,82px);
+}
+
+.collection-hero-content p:last-child{
+    font-size:20px;
+}
+
+.fine-art-story{
+    padding:90px 7%;
+}
+
+.story-text{
+    margin-bottom:80px;
+}
+
+.story-text p{
+    font-size:clamp(28px,8vw,42px);
+}
+
+.story-image{
+    margin-bottom:80px;
+}
+
+}

@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+  .awards-section {
+    padding: 20px 7% 110px;
+  }
+
+  .awards-section h2 {
+    font-size: clamp(36px, 10vw, 52px);
+  }
+
+  .awards-text p {
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .awards-gallery {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+}

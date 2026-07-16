@@ -1,0 +1,33 @@
+.subtitle {
+  margin-bottom: 22px;
+  color: var(--color-gold);
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin-bottom: 24px;
+  font-size: clamp(48px, 8vw, 108px);
+  font-weight: normal;
+  line-height: 0.95;
+}
+
+.button {
+  display: inline-block;
+  padding: 14px 26px;
+  border: 1px solid rgba(242, 238, 232, 0.55);
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition:
+    background var(--transition-medium),
+    color var(--transition-medium);
+}
+
+.button:hover {
+  background: var(--color-white);
+  color: var(--color-black);
+}

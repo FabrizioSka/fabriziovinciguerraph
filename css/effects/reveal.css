@@ -1,0 +1,39 @@
+/* REVEAL ON SCROLL */
+
+.reveal {
+
+  opacity: 0;
+
+  transform: translateY(38px);
+
+  transition:
+
+    opacity 1.2s ease,
+
+    transform 1.2s ease;
+
+}
+
+.reveal.is-visible {
+
+  opacity: 1;
+
+  transform: translateY(0);
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .reveal,
+
+  .reveal.is-visible {
+
+    opacity: 1;
+
+    transform: none;
+
+    transition: none;
+
+  }
+
+}

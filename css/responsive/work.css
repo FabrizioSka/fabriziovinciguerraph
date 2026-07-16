@@ -1,0 +1,30 @@
+@media (max-width:768px){
+
+.work-covers{
+    padding:120px 6% 50px;
+}
+
+.work-cover{
+    min-height:82vh;
+    margin-bottom:42px;
+}
+
+.work-cover:last-child{
+    margin-bottom:0;
+}
+
+.work-cover-content{
+    left:28px;
+    right:28px;
+    bottom:34px;
+}
+
+.work-cover-content h2{
+    font-size:clamp(46px,14vw,68px);
+}
+
+.work-cover-content p{
+    font-size:19px;
+}
+
+}

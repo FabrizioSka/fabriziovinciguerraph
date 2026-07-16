@@ -1,0 +1,27 @@
+/* GLOBAL INTERACTION TRANSITIONS */
+
+a,
+
+button {
+
+  transition:
+
+    color var(--transition-medium),
+
+    background-color var(--transition-medium),
+
+    border-color var(--transition-medium),
+
+    opacity var(--transition-medium);
+
+}
+
+a:focus-visible,
+
+button:focus-visible {
+
+  outline: 1px solid var(--color-gold);
+
+  outline-offset: 5px;
+
+}

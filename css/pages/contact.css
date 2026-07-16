@@ -1,0 +1,47 @@
+/* CONTACT */
+
+.contact-page {
+  min-height: 100vh;
+  max-width: 1100px;
+  margin: auto;
+  padding: 220px var(--space-page) 140px;
+}
+
+.contact-page h1 {
+  max-width: 900px;
+  margin: 24px 0 42px;
+  font-size: clamp(42px, 5vw, 82px);
+  font-weight: normal;
+  line-height: 1.05;
+}
+
+.contact-intro {
+  max-width: 640px;
+  margin-bottom: 90px;
+  color: var(--color-muted);
+  font-size: 24px;
+  line-height: 1.6;
+}
+
+.contact-links {
+  display: grid;
+  gap: 34px;
+  max-width: 760px;
+}
+
+.contact-links a,
+.contact-links div {
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: clamp(24px, 3vw, 42px);
+  line-height: 1.2;
+}
+
+.contact-links span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--color-gold);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}

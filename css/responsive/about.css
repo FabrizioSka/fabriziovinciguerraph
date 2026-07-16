@@ -1,0 +1,60 @@
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 165px 7% 76px;
+  }
+
+  .about-content h1 {
+    max-width: 100%;
+    font-size: clamp(34px, 8.8vw, 46px);
+    line-height: 1.08;
+  }
+
+  .about-text p {
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .about-story {
+    padding: 0 7% 100px;
+  }
+
+  .about-story-content p {
+    margin-bottom: 42px;
+    font-size: clamp(24px, 7vw, 34px);
+    line-height: 1.35;
+  }
+
+  .about-vision {
+    padding: 100px 7%;
+  }
+
+  .about-vision-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .about-vision-title h2 {
+    font-size: clamp(42px, 11vw, 58px);
+  }
+
+  .about-vision-text p {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .about-quote {
+    padding: 120px 7%;
+  }
+
+  .about-quote p {
+    font-size: clamp(38px, 10vw, 56px);
+  }
+
+  .about-closing {
+    padding: 60px 7% 120px;
+  }
+
+  .about-closing p {
+    font-size: clamp(38px, 11vw, 58px);
+  }
+}

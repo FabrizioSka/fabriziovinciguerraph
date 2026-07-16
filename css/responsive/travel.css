@@ -1,0 +1,79 @@
+@media (max-width: 768px) {
+
+  .travel-story {
+
+    padding-top: 90px;
+
+  }
+
+  .travel-quote {
+
+    margin: 120px auto;
+
+    padding: 0 7%;
+
+  }
+
+  .travel-quote:first-child {
+
+    margin-top: 10px;
+
+  }
+
+  .travel-quote p {
+
+    font-size: clamp(30px, 8vw, 44px);
+
+    line-height: 1.2;
+
+  }
+
+  .travel-location {
+
+    margin-bottom: 45px;
+
+    padding: 0 7%;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+  }
+
+  .travel-image {
+
+    margin-bottom: 75px;
+
+  }
+
+  .travel-image.private-portrait,
+
+  .travel-image.story-portrait {
+
+    max-width: 82vw;
+
+  }
+
+  .travel-image.private-portrait img,
+
+  .travel-image.story-portrait img {
+
+    max-height: 72vh;
+
+  }
+
+  .travel-closing {
+
+    margin: 150px auto 50px;
+
+    padding: 0 7%;
+
+  }
+
+  .travel-closing p {
+
+    font-size: clamp(36px, 10vw, 54px);
+
+  }
+
+}

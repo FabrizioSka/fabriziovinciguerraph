@@ -1,0 +1,65 @@
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  padding: 0 var(--space-page);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  background: linear-gradient(
+    to bottom,
+    rgba(9, 9, 9, 0.82),
+    rgba(9, 9, 9, 0)
+  );
+  transition:
+    background var(--transition-medium),
+    backdrop-filter var(--transition-medium);
+}
+
+.site-header.is-scrolled {
+  background: rgba(9, 9, 9, 0.86);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.brand-mark {
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.brand-name {
+  font-size: 9.5px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.main-nav {
+  display: flex;
+  gap: 28px;
+}
+
+.main-nav a {
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  transition: opacity var(--transition-medium);
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible {
+  opacity: 1;
+}

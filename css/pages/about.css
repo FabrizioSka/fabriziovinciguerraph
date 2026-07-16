@@ -1,0 +1,94 @@
+/* ABOUT */
+
+.about-hero {
+  padding: 220px var(--space-page) 140px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-content h1 {
+  max-width: 900px;
+  margin: 24px 0 48px;
+  font-size: clamp(32px, 3.6vw, 56px);
+  font-weight: normal;
+  line-height: 1.06;
+}
+
+.about-text {
+  max-width: 680px;
+}
+
+.about-text p {
+  margin-bottom: 32px;
+  color: var(--color-muted);
+  font-size: 24px;
+  line-height: 1.8;
+}
+
+.about-story {
+  padding: 0 var(--space-page) 160px;
+}
+
+.about-story-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-story-content p {
+  margin-bottom: 60px;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.45;
+}
+
+/* ABOUT VISION */
+
+.about-vision {
+  padding: 170px var(--space-page);
+}
+
+.about-vision-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.about-vision-title h2 {
+  font-size: clamp(46px, 6vw, 90px);
+  font-weight: normal;
+  line-height: 1;
+}
+
+.about-vision-text p {
+  margin-bottom: 32px;
+  color: var(--color-muted);
+  font-size: 22px;
+  line-height: 1.8;
+}
+
+/* QUOTE */
+
+.about-quote {
+  padding: 180px var(--space-page);
+  text-align: center;
+}
+
+.about-quote p {
+  max-width: 1100px;
+  margin: auto;
+  color: var(--color-gold);
+  font-size: clamp(48px, 6vw, 92px);
+  line-height: 1.1;
+}
+
+.about-closing {
+  padding: 80px var(--space-page) 180px;
+  text-align: center;
+}
+
+.about-closing p {
+  color: var(--color-gold);
+  font-size: clamp(42px, 5vw, 82px);
+  line-height: 1.1;
+}

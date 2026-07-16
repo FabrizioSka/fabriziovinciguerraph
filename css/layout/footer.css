@@ -1,0 +1,70 @@
+.footer-signature {
+  width: 100%;
+  margin: 0 auto 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-signature img {
+  width: 520px !important;
+  max-width: 90vw;
+  height: auto;
+  display: block;
+  opacity: 0.92;
+}
+
+.site-footer {
+  padding: 70px var(--space-page);
+  background: var(--color-black);
+  border-top: 1px solid rgba(242, 238, 232, 0.1);
+}
+
+.footer-label {
+  margin-bottom: 36px;
+  color: var(--color-gold);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.footer-main {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.footer-main h2 {
+  max-width: 760px;
+  font-size: clamp(40px, 5vw, 82px);
+  font-weight: normal;
+  line-height: 1;
+}
+
+.footer-links {
+  display: flex;
+  gap: 28px;
+  white-space: nowrap;
+}
+
+.footer-links a {
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.75;
+  transition: opacity var(--transition-medium);
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  opacity: 1;
+}
+
+.footer-copy {
+  margin-top: 70px;
+  color: var(--color-muted);
+  font-size: 13px;
+}

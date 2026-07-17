@@ -200,40 +200,120 @@
   margin-bottom: 90px;
 }
 
-.home-language-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  max-width: 1400px;
+.home-language-grid{
+    max-width:900px;
+    margin:0 auto;
+}
+
+.home-language-item{
+    padding:70px 0;
+    border-top:1px solid rgba(242,238,232,.10);
+    transition:all .45s ease;
+}
+
+.home-language-item:last-child{
+    border-bottom:1px solid rgba(242,238,232,.10);
+}
+
+.home-language-item span{
+    display:block;
+    margin-bottom:24px;
+
+    color:rgba(200,184,159,.65);
+
+    font-size:11px;
+    letter-spacing:4px;
+}
+
+.home-language-item h3{
+
+    font-size:clamp(52px,5vw,88px);
+
+    font-weight:normal;
+
+    line-height:.95;
+
+    transition:transform .45s ease,color .45s ease;
+}
+
+.home-language-item p{
+    max-width:560px;
+    margin-top:24px;
+    color:var(--color-muted);
+    font-size:20px;
+    line-height:1.75;
+    transition:opacity .45s ease;
+}
+
+.home-language-item:hover{
+    padding-left:18px;
+}
+
+.home-language-item:hover h3{
+    color:var(--color-white);
+    transform:translateX(12px);
+}
+
+.home-language-item:hover span{
+    color:var(--color-gold);
+}
+
+.home-language-item:hover p{
+    opacity:1;
+}
+
+/* HOME — MANIFESTO */
+
+.home-manifesto {
+  min-height: 88vh;
+  padding: 150px var(--space-page);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-black);
+  border-top: 1px solid rgba(242, 238, 232, 0.08);
+  text-align: center;
+}
+
+.home-manifesto-content {
+  max-width: 1250px;
   margin: 0 auto;
-  border-top: 1px solid rgba(242, 238, 232, 0.14);
-  border-left: 1px solid rgba(242, 238, 232, 0.14);
 }
 
-.home-language-item {
-  min-height: 340px;
-  padding: 55px 50px;
-  border-right: 1px solid rgba(242, 238, 232, 0.14);
-  border-bottom: 1px solid rgba(242, 238, 232, 0.14);
-}
-
-.home-language-item span {
-  display: block;
-  margin-bottom: 70px;
-  color: var(--color-gold);
-  font-size: 11px;
-  letter-spacing: 3px;
-}
-
-.home-language-item h3 {
-  margin-bottom: 22px;
-  font-size: clamp(38px, 4vw, 66px);
+.home-manifesto-content h2 {
+  margin-bottom: 42px;
+  font-size: clamp(58px, 7.5vw, 124px);
   font-weight: normal;
-  line-height: 1;
+  line-height: 0.96;
 }
 
-.home-language-item p {
-  max-width: 470px;
+.home-manifesto-text {
   color: var(--color-muted);
-  font-size: 19px;
-  line-height: 1.65;
+  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.6;
+}
+
+/* HOME — CLOSING IMAGE */
+
+.home-closing-image {
+  position: relative;
+  width: 100%;
+  min-height: 78vh;
+  overflow: hidden;
+  background: #111;
+}
+
+.home-closing-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 1.4s ease;
+}
+
+.home-closing-image:hover img {
+  transform: scale(1.025);
 }

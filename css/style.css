@@ -22,10 +22,6 @@
 @import url("./layout/header.css");
 @import url("./layout/footer.css");
 
-/* Components */
-
-@import url("./components/buttons.css");
-
 /* Pages */
 
 @import url("./pages/home.css");
@@ -47,4 +43,3 @@
 @import url("./responsive/contact.css");
 @import url("./responsive/awards.css");
 @import url("./responsive/footer.css");
-

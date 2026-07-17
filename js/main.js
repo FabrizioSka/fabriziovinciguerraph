@@ -3,13 +3,21 @@ import { initHeader } from "./modules/header.js";
 import { initLightbox } from "./modules/lightbox.js";
 import { initImageProtection } from "./modules/image-protection.js";
 import { initPrivateGallery } from "./modules/private-gallery.js";
+import { initPageTransitions } from "./modules/page-transitions.js";
+import { initCustomCursor } from "./modules/custom-cursor.js";
+import { initPreloader } from "./modules/preloader.js";
 
 function initSite() {
+  initPreloader();
   initReveal();
   initHeader();
   initLightbox();
   initImageProtection();
   initPrivateGallery();
+  initPageTransitions();
+  initCustomCursor();
+
+  
 }
 
 if (document.readyState === "loading") {

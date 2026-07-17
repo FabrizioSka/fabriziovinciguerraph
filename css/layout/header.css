@@ -1,3 +1,5 @@
+/* HEADER */
+
 .site-header {
   position: fixed;
   top: 0;
@@ -25,6 +27,8 @@
 }
 
 .brand {
+  position: relative;
+  z-index: 1002;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -44,9 +48,21 @@
   opacity: 0.72;
 }
 
+/* DESKTOP NAVIGATION */
+
 .main-nav {
+  display: block;
+}
+
+.main-nav-inner {
   display: flex;
+  align-items: center;
   gap: 28px;
+}
+
+.main-nav-label,
+.main-nav a span {
+  display: none;
 }
 
 .main-nav a {
@@ -62,4 +78,52 @@
 .main-nav a:hover,
 .main-nav a:focus-visible {
   opacity: 1;
+}
+
+/* MENU TOGGLE */
+
+.menu-toggle {
+  display: none;
+  position: relative;
+  z-index: 1002;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-toggle-line {
+  position: absolute;
+  left: 9px;
+  width: 26px;
+  height: 1px;
+  background: var(--color-white);
+  transition:
+    transform 0.45s ease,
+    top 0.45s ease,
+    opacity 0.35s ease;
+}
+
+.menu-toggle-line:first-child {
+  top: 17px;
+}
+
+.menu-toggle-line:last-child {
+  top: 26px;
+}
+
+.menu-toggle.is-active .menu-toggle-line:first-child {
+  top: 22px;
+  transform: rotate(45deg);
+}
+
+.menu-toggle.is-active .menu-toggle-line:last-child {
+  top: 22px;
+  transform: rotate(-45deg);
+}
+
+body.menu-open {
+  overflow: hidden;
 }

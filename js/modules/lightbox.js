@@ -39,15 +39,19 @@ export function initLightbox() {
       lightboxImg.src = item.dataset.full || item.src;
       lightboxImg.alt = item.alt || "";
 
-      if (lightboxCaption) {
-        lightboxCaption.textContent =
-          item.dataset.title || "";
-      }
+     const title = item.dataset.title?.trim() || "";
 
-      if (lightboxCounter) {
-        lightboxCounter.textContent =
-          `${currentIndex + 1} / ${lightboxItems.length}`;
-      }
+if (lightboxCaption) {
+  lightboxCaption.textContent = title;
+  lightboxCaption.hidden = !title;
+}
+
+if (lightboxCounter) {
+  lightboxCounter.textContent = title
+    ? ""
+    : `${currentIndex + 1} / ${lightboxItems.length}`;
+  lightboxCounter.hidden = Boolean(title);
+}
 
       lightboxImg.onload = () => {
         lightboxImg.style.opacity = "1";

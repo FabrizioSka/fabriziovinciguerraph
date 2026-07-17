@@ -1,25 +1,60 @@
 <header class="site-header">
 
-<a href="/" class="brand">
+  <a href="/" class="brand" aria-label="Fabrizio Vinciguerra Photography — Home">
 
-<span class="brand-mark">FV</span>
+    <span class="brand-mark">FV</span>
 
-<span class="brand-name">
-Fabrizio Vinciguerra
-</span>
+    <span class="brand-name">
+      Fabrizio Vinciguerra
+    </span>
 
-</a>
+  </a>
 
-<nav class="main-nav">
+  <button
+    class="menu-toggle"
+    type="button"
+    aria-label="Open navigation menu"
+    aria-expanded="false"
+    aria-controls="mainNavigation"
+  >
+    <span class="menu-toggle-line"></span>
+    <span class="menu-toggle-line"></span>
+  </button>
 
-<a href="/work/">Work</a>
+  <nav
+    class="main-nav"
+    id="mainNavigation"
+    aria-label="Main navigation"
+  >
 
-<a href="/private/">Private Galleries</a>
+    <div class="main-nav-inner">
 
-<a href="/about/">The Story</a>
+      <span class="main-nav-label">
+        Navigation
+      </span>
 
-<a href="/contact/">Get in Touch</a>
+      <a href="/work/">
+        <span>01</span>
+        Work
+      </a>
 
-</nav>
+      <a href="/private/">
+        <span>02</span>
+        Private Galleries
+      </a>
+
+      <a href="/about/">
+        <span>03</span>
+        The Story
+      </a>
+
+      <a href="/contact/">
+        <span>04</span>
+        Get in Touch
+      </a>
+
+    </div>
+
+  </nav>
 
 </header>

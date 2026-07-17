@@ -16,6 +16,8 @@
 
 @import url("./effects/reveal.css");
 @import url("./effects/transitions.css");
+@import url("./effects/cursor.css");
+@import url("./effects/preloader.css");
 
 /* Layout */
 

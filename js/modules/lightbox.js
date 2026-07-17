@@ -4,18 +4,23 @@ export function initLightbox() {
   if (!lightbox) return;
 
   const lightboxImg = lightbox.querySelector("img");
+
   const lightboxCaption = lightbox.querySelector(
     ".lightbox-caption"
   );
+
   const lightboxCounter = lightbox.querySelector(
     "#lightboxCounter"
   );
+
   const closeButton = lightbox.querySelector(
     ".lightbox-close"
   );
+
   const previousButton = lightbox.querySelector(
     ".lightbox-prev"
   );
+
   const nextButton = lightbox.querySelector(
     ".lightbox-next"
   );
@@ -24,59 +29,212 @@ export function initLightbox() {
     document.querySelectorAll(".lightbox-image")
   );
 
-  if (!lightboxImg || !lightboxItems.length) return;
+  if (!lightboxImg || !lightboxItems.length) {
+    return;
+  }
+
+  const supportsFinePointer = window.matchMedia(
+    "(hover: hover) and (pointer: fine)"
+  );
 
   let currentIndex = 0;
 
-  function renderItem(index) {
+  let controlsTimer = null;
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  let lastFocusedElement = null;
+
+
+  function clearMovementClasses() {
+    lightbox.classList.remove(
+      "is-moving-next",
+      "is-moving-previous"
+    );
+  }
+
+
+  function updateInformation(item) {
+    const title =
+      item.dataset.title?.trim() || "";
+
+    if (lightboxCaption) {
+      lightboxCaption.textContent = title;
+      lightboxCaption.hidden = !title;
+    }
+
+    if (lightboxCounter) {
+      lightboxCounter.textContent = title
+        ? ""
+        : `${currentIndex + 1} / ${lightboxItems.length}`;
+
+      lightboxCounter.hidden = Boolean(title);
+    }
+  }
+
+
+  function showControls() {
+    if (!supportsFinePointer.matches) {
+      return;
+    }
+
+    lightbox.classList.remove(
+      "controls-hidden"
+    );
+
+    window.clearTimeout(controlsTimer);
+
+    controlsTimer = window.setTimeout(() => {
+      if (
+        lightbox.classList.contains("is-open")
+      ) {
+        lightbox.classList.add(
+          "controls-hidden"
+        );
+      }
+    }, 2200);
+  }
+
+
+  function renderItem(index, direction = null) {
     currentIndex = index;
 
     const item = lightboxItems[currentIndex];
 
-    lightboxImg.style.opacity = "0";
+    const source =
+      item.dataset.full || item.src;
 
-    window.setTimeout(() => {
-      lightboxImg.src = item.dataset.full || item.src;
+    clearMovementClasses();
+
+    if (direction === "next") {
+      lightbox.classList.add(
+        "is-moving-next"
+      );
+    }
+
+    if (direction === "previous") {
+      lightbox.classList.add(
+        "is-moving-previous"
+      );
+    }
+
+    lightboxImg.classList.remove(
+      "is-visible"
+    );
+
+    lightboxImg.classList.add(
+      "is-changing"
+    );
+
+    const preloadedImage = new Image();
+
+    preloadedImage.onload = () => {
+      lightboxImg.src = source;
       lightboxImg.alt = item.alt || "";
 
-     const title = item.dataset.title?.trim() || "";
+      updateInformation(item);
 
-if (lightboxCaption) {
-  lightboxCaption.textContent = title;
-  lightboxCaption.hidden = !title;
-}
+      window.requestAnimationFrame(() => {
+        lightboxImg.classList.remove(
+          "is-changing"
+        );
 
-if (lightboxCounter) {
-  lightboxCounter.textContent = title
-    ? ""
-    : `${currentIndex + 1} / ${lightboxItems.length}`;
-  lightboxCounter.hidden = Boolean(title);
-}
+        window.requestAnimationFrame(() => {
+          lightboxImg.classList.add(
+            "is-visible"
+          );
 
-      lightboxImg.onload = () => {
-        lightboxImg.style.opacity = "1";
-      };
-    }, 180);
+          clearMovementClasses();
+        });
+      });
+    };
+
+    preloadedImage.onerror = () => {
+      lightboxImg.classList.remove(
+        "is-changing"
+      );
+
+      clearMovementClasses();
+    };
+
+    preloadedImage.src = source;
   }
+
 
   function openLightbox(index) {
-    renderItem(index);
+    lastFocusedElement =
+      document.activeElement;
+
+    lightbox.classList.remove(
+      "controls-hidden"
+    );
 
     lightbox.classList.add("is-open");
-    document.body.classList.add("lightbox-open");
+
+    lightbox.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+    document.body.classList.add(
+      "lightbox-open"
+    );
+
+    renderItem(index);
+
+    showControls();
+
+    closeButton?.focus({
+      preventScroll: true
+    });
   }
 
+
   function closeLightbox() {
-    lightbox.classList.remove("is-open");
-    document.body.classList.remove("lightbox-open");
+    lightbox.classList.remove(
+      "is-open",
+      "controls-hidden",
+      "is-moving-next",
+      "is-moving-previous"
+    );
+
+    lightbox.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    lightboxImg.classList.remove(
+      "is-visible",
+      "is-changing"
+    );
+
+    document.body.classList.remove(
+      "lightbox-open"
+    );
+
+    window.clearTimeout(controlsTimer);
+
+    if (
+      lastFocusedElement instanceof HTMLElement
+    ) {
+      lastFocusedElement.focus({
+        preventScroll: true
+      });
+    }
   }
+
 
   function showNext() {
     const nextIndex =
-      (currentIndex + 1) % lightboxItems.length;
+      (currentIndex + 1) %
+      lightboxItems.length;
 
-    renderItem(nextIndex);
+    renderItem(nextIndex, "next");
+
+    showControls();
   }
+
 
   function showPrevious() {
     const previousIndex =
@@ -84,10 +242,17 @@ if (lightboxCounter) {
         currentIndex -
         1 +
         lightboxItems.length
-      ) % lightboxItems.length;
+      ) %
+      lightboxItems.length;
 
-    renderItem(previousIndex);
+    renderItem(
+      previousIndex,
+      "previous"
+    );
+
+    showControls();
   }
+
 
   lightboxItems.forEach((item, index) => {
     item.addEventListener("click", () => {
@@ -95,48 +260,135 @@ if (lightboxCounter) {
     });
   });
 
+
   closeButton?.addEventListener(
     "click",
     closeLightbox
   );
+
 
   nextButton?.addEventListener(
     "click",
     showNext
   );
 
+
   previousButton?.addEventListener(
     "click",
     showPrevious
   );
 
-  lightbox.addEventListener("click", (event) => {
-    if (event.target !== lightbox) return;
 
-    const middle = window.innerWidth / 2;
+  lightbox.addEventListener(
+    "pointermove",
+    showControls
+  );
 
-    if (event.clientX > middle) {
-      showNext();
-    } else {
-      showPrevious();
+
+  lightbox.addEventListener(
+    "click",
+    (event) => {
+      if (event.target !== lightbox) {
+        return;
+      }
+
+      const middle =
+        window.innerWidth / 2;
+
+      if (event.clientX > middle) {
+        showNext();
+      } else {
+        showPrevious();
+      }
     }
+  );
+
+
+  lightbox.addEventListener(
+    "touchstart",
+    (event) => {
+      const touch =
+        event.changedTouches[0];
+
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    },
+    {
+      passive: true
+    }
+  );
+
+
+  lightbox.addEventListener(
+    "touchend",
+    (event) => {
+      const touch =
+        event.changedTouches[0];
+
+      const distanceX =
+        touch.clientX - touchStartX;
+
+      const distanceY =
+        touch.clientY - touchStartY;
+
+      const horizontalSwipe =
+        Math.abs(distanceX) >
+        Math.abs(distanceY);
+
+      if (
+        !horizontalSwipe ||
+        Math.abs(distanceX) < 45
+      ) {
+        return;
+      }
+
+      if (distanceX < 0) {
+        showNext();
+      } else {
+        showPrevious();
+      }
+    },
+    {
+      passive: true
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+      if (
+        !lightbox.classList.contains(
+          "is-open"
+        )
+      ) {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+
+      if (event.key === "ArrowRight") {
+        showNext();
+      }
+
+      if (event.key === "ArrowLeft") {
+        showPrevious();
+      }
+    }
+  );
+
+
+  window.addEventListener("blur", () => {
+    lightbox.classList.remove(
+      "controls-hidden"
+    );
   });
 
-  document.addEventListener("keydown", (event) => {
-    if (!lightbox.classList.contains("is-open")) {
-      return;
-    }
 
-    if (event.key === "Escape") {
-      closeLightbox();
-    }
-
-    if (event.key === "ArrowRight") {
-      showNext();
-    }
-
-    if (event.key === "ArrowLeft") {
-      showPrevious();
-    }
-  });
+  lightbox.setAttribute(
+    "aria-hidden",
+    "true"
+  );
 }

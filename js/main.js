@@ -6,6 +6,7 @@ import { initPrivateGallery } from "./modules/private-gallery.js";
 import { initPageTransitions } from "./modules/page-transitions.js";
 import { initCustomCursor } from "./modules/custom-cursor.js";
 import { initPreloader } from "./modules/preloader.js";
+import { initHero } from "./modules/hero.js";
 
 function initSite() {
   initPreloader();
@@ -16,7 +17,7 @@ function initSite() {
   initPrivateGallery();
   initPageTransitions();
   initCustomCursor();
-
+  initHero();
   
 }
 

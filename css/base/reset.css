@@ -5,11 +5,16 @@
 }
 
 html {
+  max-width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
+
   background: var(--color-black);
   color: var(--color-white);
   font-family: var(--font-serif);

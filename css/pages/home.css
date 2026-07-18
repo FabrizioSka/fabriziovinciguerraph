@@ -369,32 +369,42 @@
 /* HOME — MANIFESTO */
 
 .home-manifesto {
-  min-height: 88vh;
-  padding: 150px var(--space-page);
+  min-height: 92vh;
+  padding: 180px var(--space-page);
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   background: var(--color-black);
-  border-top: 1px solid rgba(242, 238, 232, 0.08);
+  border-top: 1px solid rgba(242, 238, 232, .08);
   text-align: center;
 }
 
 .home-manifesto-content {
-  max-width: 1250px;
+  width: 100%;
+  max-width: 1180px;
   margin: 0 auto;
 }
 
 .home-manifesto-content h2 {
-  margin-bottom: 42px;
-  font-size: clamp(58px, 7.5vw, 124px);
+  max-width: 1100px;
+  margin: 0 auto 46px;
+
+  font-size: clamp(58px, 7.2vw, 118px);
   font-weight: normal;
-  line-height: 0.96;
+  line-height: .96;
+  letter-spacing: -.025em;
 }
 
 .home-manifesto-text {
+  max-width: 720px;
+  margin: 0 auto;
+
   color: var(--color-muted);
   font-size: clamp(20px, 2vw, 28px);
-  line-height: 1.6;
+  font-weight: 300;
+  line-height: 1.65;
 }
 
 /* HOME — CLOSING IMAGE */

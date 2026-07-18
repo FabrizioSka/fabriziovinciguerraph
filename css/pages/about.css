@@ -121,16 +121,31 @@
 /* QUOTE */
 
 .about-quote {
+  min-height: 78vh;
   padding: 180px var(--space-page);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   text-align: center;
 }
 
+.about-quote-content {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
 .about-quote p {
-  max-width: 1100px;
-  margin: auto;
+  max-width: 1080px;
+  margin: 0 auto;
+
   color: var(--color-gold);
   font-size: clamp(48px, 6vw, 92px);
-  line-height: 1.1;
+  font-weight: normal;
+  line-height: 1.08;
+  letter-spacing: -.02em;
 }
 
 .about-closing {

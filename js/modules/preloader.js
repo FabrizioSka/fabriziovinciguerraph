@@ -38,18 +38,18 @@ export function initPreloader() {
 
     window.setTimeout(() => {
       preloader.remove();
-    }, 800);
+    }, 450);
   }
 
   function scheduleClose() {
-    window.setTimeout(closePreloader, 1050);
+    window.setTimeout(closePreloader, 250);
   }
 
-  if (document.readyState === "complete") {
-    scheduleClose();
-  } else {
-    window.addEventListener("load", scheduleClose, {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleClose, {
       once: true
     });
+  } else {
+    scheduleClose();
   }
 }

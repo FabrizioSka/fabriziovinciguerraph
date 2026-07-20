@@ -24,15 +24,13 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-  .reveal,
+  .reveal {
 
-  .reveal.is-visible {
+    transform: translateY(10px);
 
-    opacity: 1;
-
-    transform: none;
-
-    transition: none;
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease;
 
   }
 

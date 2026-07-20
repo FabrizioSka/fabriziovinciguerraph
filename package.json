@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "dev": "eleventy --serve",
-    "build": "eleventy"
-  },
+"scripts": {
+  "dev": "eleventy --serve",
+  "build:css": "node build-css.js",
+  "build": "eleventy && npm run build:css"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -14,5 +15,8 @@
   "dependencies": {
     "@11ty/eleventy": "^3.1.6",
     "image-size": "^2.0.2"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
   }
 }

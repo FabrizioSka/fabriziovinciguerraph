@@ -1,11 +1,28 @@
+const esbuild = require("esbuild");
+
+async function buildCss() {
+  await esbuild.build({
+    entryPoints: ["css/style.css"],
+    bundle: true,
+    minify: true,
+    outfile: "_site/css/style.css",
+    external: ["/assets/*", "../../assets/*"],
+    logLevel: "info"
+  });
+}
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("js");
 
-  // Durante lo sviluppo serve direttamente i file sorgente.
-  // Evita copie CSS vecchie dentro _site.
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
+
+  eleventyConfig.addWatchTarget("./css/");
+
+  eleventyConfig.on("eleventy.after", async () => {
+    await buildCss();
+  });
 
   return {
     dir: {

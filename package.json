@@ -5,8 +5,7 @@
   "main": "index.js",
 "scripts": {
   "dev": "eleventy --serve",
-  "build:css": "node build-css.js",
-  "build": "eleventy && npm run build:css"
+  "build": "eleventy"
 },
   "keywords": [],
   "author": "",

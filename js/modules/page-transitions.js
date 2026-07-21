@@ -74,18 +74,18 @@ export function initPageTransitions() {
 
     if (!isEligibleLink(link, event)) return;
 
-    if (reduceMotion.matches) return;
-
-    event.preventDefault();
+event.preventDefault();
 
     const destination = link.href;
+    const transitionDuration = reduceMotion.matches ? 350 : 520;
 
     document.body.classList.remove("page-is-ready");
     document.body.classList.add("is-leaving");
 
     window.setTimeout(() => {
-      window.location.href = destination;
-    }, 520);
+    window.location.href = destination;
+},  transitionDuration);
+
   });
 
   window.addEventListener("pageshow", () => {

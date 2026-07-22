@@ -37,6 +37,7 @@
 @import url("./pages/about.css");
 @import url("./pages/contact.css");
 @import url("./pages/awards.css");
+@import url("./pages/404.css");
 
 /* Responsive */
 
@@ -49,3 +50,6 @@
 @import url("./responsive/contact.css");
 @import url("./responsive/awards.css");
 @import url("./responsive/footer.css");
+
+
+

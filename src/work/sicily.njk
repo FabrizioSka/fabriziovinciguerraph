@@ -56,7 +56,7 @@ ogImageAlt: "Fine art landscape photography from Sicily by Fabrizio Vinciguerra"
     </p>
   </div>
 
-{% for photo in sicily %}
+  {% for photo in sicily %}
 
     {% if loop.index == 5 %}
       <div class="travel-quote reveal">
@@ -76,36 +76,100 @@ ogImageAlt: "Fine art landscape photography from Sicily by Fabrizio Vinciguerra"
       </div>
     {% endif %}
 
-    {% if loop.index == 11 %}
-      <div class="travel-quote reveal">
-        <p>
-          Eventually,<br>
-          every silence meets the sea.
-        </p>
-      </div>
-    {% endif %}
+{% if loop.index == 11 %}
 
-    <figure class="story-image travel-image {{ photo.class }} reveal">
+  <div class="travel-quote reveal">
+    <p>
+      Eventually,<br>
+      every silence meets the sea.
+    </p>
+  </div>
 
-      <img
-        src="{{ photo.src }}"
-        alt="{{ photo.alt }}"
-        loading="lazy"
-        decoding="async"
-        class="lightbox-image"
-        data-full="{{ photo.src }}"
-        data-title="{{ photo.title }}"
+  <figure
+    class="story-image travel-image private-landscape reveal"
+  >
+    <img
+      src="/assets/images/sicily/cyclone-henry/01-cover.jpg"
+      alt="Powerful storm waves beneath the Faraglioni of Aci Trezza during Cyclone Henry"
+      loading="lazy"
+      decoding="async"
+      class="lightbox-image"
+      data-full="/assets/images/sicily/cyclone-henry/01-cover.jpg"
+      data-title="The Sea Rose"
+      data-location="Aci Trezza, Sicily"
+      data-year="2026"
+      data-lightbox-group="cyclone-henry"
+      role="button"
+      tabindex="0"
+      aria-label="Open the Cyclone Henry photographic series"
+    >
+  </figure>
+
+  <div
+    hidden
+    aria-hidden="true"
+    data-lightbox-storage
+  >
+    <span
+      class="lightbox-image"
+      data-full="/assets/images/sicily/cyclone-henry/02-stone-and-fury.jpg"
+      data-alt="Sea spray rising beside the Faraglioni of Aci Trezza during Cyclone Henry"
+      data-title="Stone and Fury"
+      data-location="Aci Trezza, Sicily"
+      data-year="2026"
+      data-lightbox-group="cyclone-henry"
+    ></span>
+
+    <span
+      class="lightbox-image"
+      data-full="/assets/images/sicily/cyclone-henry/03-where-the-sea-breaks.jpg"
+      data-alt="Storm waves surrounding the volcanic rocks of Aci Trezza during Cyclone Henry"
+      data-title="Where the Sea Breaks"
+      data-location="Aci Trezza, Sicily"
+      data-year="2026"
+      data-lightbox-group="cyclone-henry"
+    ></span>
+
+    <span
+      class="lightbox-image"
+      data-full="/assets/images/sicily/cyclone-henry/04-the-weight-of-water.jpg"
+      data-alt="A monumental wall of sea spray during Cyclone Henry in Aci Trezza"
+      data-title="The Weight of Water"
+      data-location="Aci Trezza, Sicily"
+      data-year="2026"
+      data-lightbox-group="cyclone-henry"
+    ></span>
+  </div>
+
+{% endif %}
+
+    <figure
+      class="story-image travel-image {{ photo.class }} reveal"
+    >
+
+     <img
+      src="{{ photo.src }}"
+      alt="{{ photo.alt }}"
+      loading="lazy"
+      decoding="async"
+      class="lightbox-image"
+      data-full="{{ photo.src }}"
+      data-title="{{ photo.title }}"
+      data-lightbox-group="sicily"
+      role="button"
+      tabindex="0"
+      aria-label="Open {{ photo.title }}"
       >
 
     </figure>
 
-{% endfor %}
+  {% endfor %}
 
-<div class="travel-closing reveal">
-  <p>
-    Some places remain inside you.<br>
-    Sicily has always been one of them.
-  </p>
-</div>
+  <div class="travel-closing reveal">
+    <p>
+      Some places remain inside you.<br>
+      Sicily has always been one of them.
+    </p>
+  </div>
 
 </section>

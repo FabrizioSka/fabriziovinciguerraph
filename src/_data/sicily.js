@@ -1,3 +1,8 @@
-const getGallery = require("../../utils/galleryUtils");
+const getGallery = require(
+  "../../utils/galleryUtils"
+);
 
-module.exports = getGallery("sicily", "Sicily");
+module.exports = getGallery(
+  "sicily",
+  "Sicily"
+);

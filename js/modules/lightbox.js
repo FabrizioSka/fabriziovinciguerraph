@@ -37,6 +37,7 @@ export function initLightbox() {
     "(hover: hover) and (pointer: fine)"
   );
 
+  let activeItems = lightboxItems;
   let currentIndex = 0;
 
   let controlsTimer = null;
@@ -55,21 +56,91 @@ export function initLightbox() {
   }
 
 
+  function getItemGroup(item) {
+    return (
+      item.dataset.lightboxGroup ||
+      "default"
+    );
+  }
+
+
+  function getGroupItems(item) {
+    const selectedGroup =
+      getItemGroup(item);
+
+    return lightboxItems.filter(
+      (lightboxItem) =>
+        getItemGroup(lightboxItem) ===
+        selectedGroup
+    );
+  }
+
+
   function updateInformation(item) {
     const title =
       item.dataset.title?.trim() || "";
 
+    const location =
+      item.dataset.location?.trim() || "";
+
+    const year =
+      item.dataset.year?.trim() || "";
+
+    const metadata = [
+      location,
+      year
+    ]
+      .filter(Boolean)
+      .join(" · ");
+
+    const caption = [
+      title,
+      metadata
+    ]
+      .filter(Boolean)
+      .join(" — ");
+
     if (lightboxCaption) {
-      lightboxCaption.textContent = title;
-      lightboxCaption.hidden = !title;
+      lightboxCaption.textContent =
+        caption;
+
+      lightboxCaption.hidden =
+        !caption;
     }
 
     if (lightboxCounter) {
-      lightboxCounter.textContent = title
-        ? ""
-        : `${currentIndex + 1} / ${lightboxItems.length}`;
+      lightboxCounter.textContent =
+        `${currentIndex + 1} / ${activeItems.length}`;
 
-      lightboxCounter.hidden = Boolean(title);
+      /*
+       * Mantiene il comportamento visivo attuale:
+       * se esiste una didascalia, il contatore non viene
+       * sovrapposto nella stessa riga.
+       */
+      lightboxCounter.hidden =
+        Boolean(caption);
+    }
+  }
+
+
+  function updateNavigationControls() {
+    const hasMultipleItems =
+      activeItems.length > 1;
+
+    if (previousButton) {
+      previousButton.hidden =
+        !hasMultipleItems;
+
+      previousButton.disabled =
+        !hasMultipleItems;
+    }
+
+    if (nextButton) {
+      nextButton.hidden =
+        !hasMultipleItems;
+
+      nextButton.disabled =
+        !hasMultipleItems;
     }
   }
 
@@ -83,27 +154,50 @@ export function initLightbox() {
       "controls-hidden"
     );
 
-    window.clearTimeout(controlsTimer);
+    window.clearTimeout(
+      controlsTimer
+    );
 
-    controlsTimer = window.setTimeout(() => {
-      if (
-        lightbox.classList.contains("is-open")
-      ) {
-        lightbox.classList.add(
-          "controls-hidden"
-        );
-      }
-    }, 2200);
+    controlsTimer =
+      window.setTimeout(() => {
+        if (
+          lightbox.classList.contains(
+            "is-open"
+          )
+        ) {
+          lightbox.classList.add(
+            "controls-hidden"
+          );
+        }
+      }, 2200);
   }
 
 
-  function renderItem(index, direction = null) {
+  function renderItem(
+    index,
+    direction = null
+  ) {
+    if (!activeItems.length) {
+      return;
+    }
+
     currentIndex = index;
 
-    const item = lightboxItems[currentIndex];
+    const item =
+      activeItems[currentIndex];
 
     const source =
-      item.dataset.full || item.src;
+      item.dataset.full ||
+      item.getAttribute("src");
+
+    if (!source) {
+      return;
+    }
+
+    const alternativeText =
+      item.dataset.alt ||
+      item.getAttribute("alt") ||
+      "";
 
     clearMovementClasses();
 
@@ -127,27 +221,33 @@ export function initLightbox() {
       "is-changing"
     );
 
-    const preloadedImage = new Image();
+    const preloadedImage =
+      new Image();
 
     preloadedImage.onload = () => {
       lightboxImg.src = source;
-      lightboxImg.alt = item.alt || "";
+      lightboxImg.alt =
+        alternativeText;
 
       updateInformation(item);
 
-      window.requestAnimationFrame(() => {
-        lightboxImg.classList.remove(
-          "is-changing"
-        );
-
-        window.requestAnimationFrame(() => {
-          lightboxImg.classList.add(
-            "is-visible"
+      window.requestAnimationFrame(
+        () => {
+          lightboxImg.classList.remove(
+            "is-changing"
           );
 
-          clearMovementClasses();
-        });
-      });
+          window.requestAnimationFrame(
+            () => {
+              lightboxImg.classList.add(
+                "is-visible"
+              );
+
+              clearMovementClasses();
+            }
+          );
+        }
+      );
     };
 
     preloadedImage.onerror = () => {
@@ -162,15 +262,29 @@ export function initLightbox() {
   }
 
 
-  function openLightbox(index) {
+  function openLightbox(item) {
     lastFocusedElement =
       document.activeElement;
+
+    activeItems =
+      getGroupItems(item);
+
+    currentIndex =
+      activeItems.indexOf(item);
+
+    if (currentIndex < 0) {
+      currentIndex = 0;
+    }
+
+    updateNavigationControls();
 
     lightbox.classList.remove(
       "controls-hidden"
     );
 
-    lightbox.classList.add("is-open");
+    lightbox.classList.add(
+      "is-open"
+    );
 
     lightbox.setAttribute(
       "aria-hidden",
@@ -181,7 +295,7 @@ export function initLightbox() {
       "lightbox-open"
     );
 
-    renderItem(index);
+    renderItem(currentIndex);
 
     showControls();
 
@@ -209,14 +323,23 @@ export function initLightbox() {
       "is-changing"
     );
 
+    lightboxImg.removeAttribute("src");
+    lightboxImg.alt = "";
+
     document.body.classList.remove(
       "lightbox-open"
     );
 
-    window.clearTimeout(controlsTimer);
+    window.clearTimeout(
+      controlsTimer
+    );
+
+    activeItems = lightboxItems;
+    currentIndex = 0;
 
     if (
-      lastFocusedElement instanceof HTMLElement
+      lastFocusedElement instanceof
+      HTMLElement
     ) {
       lastFocusedElement.focus({
         preventScroll: true
@@ -226,24 +349,35 @@ export function initLightbox() {
 
 
   function showNext() {
+    if (activeItems.length <= 1) {
+      return;
+    }
+
     const nextIndex =
       (currentIndex + 1) %
-      lightboxItems.length;
+      activeItems.length;
 
-    renderItem(nextIndex, "next");
+    renderItem(
+      nextIndex,
+      "next"
+    );
 
     showControls();
   }
 
 
   function showPrevious() {
+    if (activeItems.length <= 1) {
+      return;
+    }
+
     const previousIndex =
       (
         currentIndex -
         1 +
-        lightboxItems.length
+        activeItems.length
       ) %
-      lightboxItems.length;
+      activeItems.length;
 
     renderItem(
       previousIndex,
@@ -254,10 +388,94 @@ export function initLightbox() {
   }
 
 
-  lightboxItems.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      openLightbox(index);
-    });
+  function trapFocus(event) {
+    if (
+      event.key !== "Tab" ||
+      !lightbox.classList.contains(
+        "is-open"
+      )
+    ) {
+      return;
+    }
+
+    const focusableElements = [
+      closeButton,
+      previousButton,
+      nextButton
+    ].filter(
+      (element) =>
+        element &&
+        !element.hidden &&
+        !element.disabled
+    );
+
+    if (!focusableElements.length) {
+      return;
+    }
+
+    const firstElement =
+      focusableElements[0];
+
+    const lastElement =
+      focusableElements[
+        focusableElements.length - 1
+      ];
+
+    if (
+      event.shiftKey &&
+      document.activeElement ===
+        firstElement
+    ) {
+      event.preventDefault();
+      lastElement.focus();
+      return;
+    }
+
+    if (
+      !event.shiftKey &&
+      document.activeElement ===
+        lastElement
+    ) {
+      event.preventDefault();
+      firstElement.focus();
+    }
+  }
+
+
+  lightboxItems.forEach((item) => {
+    /*
+     * Le immagini archiviate per una mini-serie
+     * non devono diventare elementi cliccabili.
+     */
+    if (
+      item.closest(
+        "[data-lightbox-storage]"
+      )
+    ) {
+      return;
+    }
+
+    item.addEventListener(
+      "click",
+      () => {
+        openLightbox(item);
+      }
+    );
+
+    item.addEventListener(
+      "keydown",
+      (event) => {
+        if (
+          event.key !== "Enter" &&
+          event.key !== " "
+        ) {
+          return;
+        }
+
+        event.preventDefault();
+        openLightbox(item);
+      }
+    );
   });
 
 
@@ -288,7 +506,10 @@ export function initLightbox() {
   lightbox.addEventListener(
     "click",
     (event) => {
-      if (event.target !== lightbox) {
+      if (
+        event.target !== lightbox ||
+        activeItems.length <= 1
+      ) {
         return;
       }
 
@@ -310,8 +531,11 @@ export function initLightbox() {
       const touch =
         event.changedTouches[0];
 
-      touchStartX = touch.clientX;
-      touchStartY = touch.clientY;
+      touchStartX =
+        touch.clientX;
+
+      touchStartY =
+        touch.clientY;
     },
     {
       passive: true
@@ -322,14 +546,20 @@ export function initLightbox() {
   lightbox.addEventListener(
     "touchend",
     (event) => {
+      if (activeItems.length <= 1) {
+        return;
+      }
+
       const touch =
         event.changedTouches[0];
 
       const distanceX =
-        touch.clientX - touchStartX;
+        touch.clientX -
+        touchStartX;
 
       const distanceY =
-        touch.clientY - touchStartY;
+        touch.clientY -
+        touchStartY;
 
       const horizontalSwipe =
         Math.abs(distanceX) >
@@ -365,6 +595,8 @@ export function initLightbox() {
         return;
       }
 
+      trapFocus(event);
+
       if (event.key === "Escape") {
         closeLightbox();
       }
@@ -380,11 +612,14 @@ export function initLightbox() {
   );
 
 
-  window.addEventListener("blur", () => {
-    lightbox.classList.remove(
-      "controls-hidden"
-    );
-  });
+  window.addEventListener(
+    "blur",
+    () => {
+      lightbox.classList.remove(
+        "controls-hidden"
+      );
+    }
+  );
 
 
   lightbox.setAttribute(

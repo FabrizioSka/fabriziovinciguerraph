@@ -1,0 +1,35 @@
+{
+  "id": "cyclone-henry",
+  "title": "The Sea Rose",
+  "subtitle": "Cyclone Henry",
+  "location": "Aci Trezza, Sicily",
+  "year": "2026",
+  "cover": "01-cover.jpg",
+  "order": 1,
+  "photos": [
+    {
+      "file": "01-cover.jpg",
+      "title": "The Sea Rose",
+      "location": "Aci Trezza, Sicily",
+      "year": "2026"
+    },
+    {
+      "file": "02.jpg",
+      "title": "Stone and Fury",
+      "location": "Aci Trezza, Sicily",
+      "year": "2026"
+    },
+    {
+      "file": "03.jpg",
+      "title": "Where the Sea Breaks",
+      "location": "Aci Trezza, Sicily",
+      "year": "2026"
+    },
+    {
+      "file": "04.jpg",
+      "title": "The Weight of Water",
+      "location": "Aci Trezza, Sicily",
+      "year": "2026"
+    }
+  ]
+}

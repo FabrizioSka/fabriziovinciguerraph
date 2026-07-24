@@ -4,23 +4,23 @@
 {
   "@context": "https://schema.org",
   "@type": "ImageGallery",
-  "@id": "https://www.fabriziovinciguerraph.com{{ page.url }}#gallery",
-  "url": "https://www.fabriziovinciguerraph.com{{ page.url }}",
+  "@id": "https://fabriziovinciguerraph.com{{ page.url }}#gallery",
+  "url": "https://fabriziovinciguerraph.com{{ page.url }}",
   "name": "{{ galleryName }}",
   "description": "{{ galleryDescription }}",
   "creator": {
     "@type": "Person",
-    "@id": "https://www.fabriziovinciguerraph.com/#fabrizio-vinciguerra",
+    "@id": "https://fabriziovinciguerraph.com/#fabrizio-vinciguerra",
     "name": "Fabrizio Vinciguerra",
-    "url": "https://www.fabriziovinciguerraph.com/"
+    "url": "https://fabriziovinciguerraph.com/"
   },
   "image": [
     {% for photo in gallery %}
     {
       "@type": "ImageObject",
-      "@id": "https://www.fabriziovinciguerraph.com{{ photo.src }}#image",
-      "contentUrl": "https://www.fabriziovinciguerraph.com{{ photo.src }}",
-      "url": "https://www.fabriziovinciguerraph.com{{ photo.src }}",
+      "@id": "https://fabriziovinciguerraph.com{{ photo.src }}#image",
+      "contentUrl": "https://fabriziovinciguerraph.com{{ photo.src }}",
+      "url": "https://fabriziovinciguerraph.com{{ photo.src }}",
       "name": "{{ photo.title }}",
       "caption": "{{ photo.alt }}",
       "description": "{{ photo.alt }}",
@@ -28,7 +28,7 @@
       "copyrightNotice": "Copyright Fabrizio Vinciguerra",
       "creator": {
         "@type": "Person",
-        "@id": "https://www.fabriziovinciguerraph.com/#fabrizio-vinciguerra",
+        "@id": "https://fabriziovinciguerraph.com/#fabrizio-vinciguerra",
         "name": "Fabrizio Vinciguerra"
       }{% if photo.location %},
       "contentLocation": {
